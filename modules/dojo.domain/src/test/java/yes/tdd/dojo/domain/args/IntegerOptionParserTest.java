@@ -36,4 +36,11 @@ public class IntegerOptionParserTest {
     void should_set_default_value_for_string_option() {
         assertEquals(0, new SingleValuedOptionParser<>(0, String::valueOf).parse(List.of(), option("-p")));
     }
+
+    @Test
+    void should_not_accept_extra_argument_for_d_object() {
+        TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () ->
+            new SingleValuedOptionParser<>("", String::valueOf).parse(asList("-d", "/usr/logs", "~/logs"), option("-d")));
+        assertEquals(e.getOption(), "-d");
+    }
 }
