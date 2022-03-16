@@ -10,7 +10,7 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 import static yes.tdd.dojo.domain.args.BooleanOptionParserTest.option;
 
-public class IntegerOptionParserTest {
+public class SingleValuedOptionParserTest {
 
     @Test
     void should_not_accept_extra_argument_for_single_valued_option() {
@@ -42,5 +42,15 @@ public class IntegerOptionParserTest {
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () ->
             new SingleValuedOptionParser<>("", String::valueOf).parse(asList("-d", "/usr/logs", "~/logs"), option("-d")));
         assertEquals(e.getOption(), "-d");
+    }
+
+    @Test
+    void should_parse_value_if_flag_string_present() {
+        assertEquals(8080, new SingleValuedOptionParser<>(0, Integer::parseInt).parse(List.of("-p", "8080"), option("-p")));
+    }
+
+    @Test
+    void should_parse_value_if_flag_int_present() {
+        assertEquals("/usr/logs", new SingleValuedOptionParser<>(0, String::valueOf).parse(List.of("-d", "/usr/logs"), option("-d")));
     }
 }
