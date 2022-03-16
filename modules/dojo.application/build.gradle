@@ -1,5 +1,5 @@
 dependencies {
     implementation project(":domain.core")
     api project(":application.core")
-    api project(":command.domain")
+    api project(":dojo.domain")
 }

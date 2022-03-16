@@ -1,4 +1,4 @@
-package yes.tdd.command.gateways;
+package yes.tdd.dojo.gateways;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package yes.tdd.command.application;
+package yes.tdd.dojo.domain;
 
 import org.junit.jupiter.api.Test;
 
