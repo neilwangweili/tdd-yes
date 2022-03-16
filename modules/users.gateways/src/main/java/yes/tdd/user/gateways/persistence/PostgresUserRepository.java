@@ -18,4 +18,11 @@ public interface PostgresUserRepository extends Repository<PostgresUser, String>
     }
 
     PostgresUser findById(String id);
+
+    @Override
+    default void removeAll() {
+        this.deleteAll();
+    }
+
+    void deleteAll();
 }
