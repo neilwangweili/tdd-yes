@@ -4,7 +4,10 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.IntStream;
 
-public class OptionParsers {
+public final class OptionParsers {
+    private OptionParsers() {
+    }
+
     public static OptionParser<Boolean> bool() {
         return (arguments, option) -> values(arguments, option, 0).isPresent();
     }

@@ -1,20 +1,22 @@
 package yes.tdd.dojo.domain.args;
 
+import yes.tdd.frameworks.domain.core.Exceptions;
+
 import java.lang.reflect.*;
 import java.util.*;
 
 import static yes.tdd.dojo.domain.args.OptionParsers.*;
 
-public class Args {
+public final class Args {
+    private Args() {
+    }
+
+    @SuppressWarnings("all")
     public static <T> T parse(Class<T> optionClass, String... args) {
         Constructor<?> constructor = optionClass.getDeclaredConstructors()[0];
         List<String> arguments = Arrays.asList(args);
         Object[] values = Arrays.stream(constructor.getParameters()).map(o -> parseOption(o, arguments)).toArray();
-        try {
-            return (T) constructor.newInstance(values);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return Exceptions.evaluate(() -> (T) constructor.newInstance(values));
     }
 
     private static Object parseOption(Parameter parameter, List<String> arguments) {
@@ -26,7 +28,6 @@ public class Args {
         int.class, unary(0, Integer::parseInt),
         String.class, unary("", String::valueOf),
         String[].class, list(String[]::new, String::valueOf),
-        int[].class, list(Integer[]::new, Integer::parseInt),
         Integer[].class, list(Integer[]::new, Integer::parseInt));
 
     private static OptionParser<?> getOptionalParser(Parameter parameter) {

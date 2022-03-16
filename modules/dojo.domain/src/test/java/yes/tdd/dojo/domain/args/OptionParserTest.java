@@ -86,6 +86,25 @@ public class OptionParserTest {
 
     }
 
+    @Nested
+    class ListOptionTest {
+
+        @Test
+        void should_not_treat_negative_int_with_flag() {
+            assertArrayEquals(new Integer[]{1, 2, -3, 5}, OptionParsers.list(Integer[]::new, Integer::parseInt).parse(asList("-", "-d", "1", "2", "-3", "5"), option("-d")));
+        }
+
+        @Test
+        void should_parse_list_value() {
+            assertArrayEquals(new String[]{"this", "is", "a", "list"}, OptionParsers.list(String[]::new, String::valueOf).parse(asList("-g", "this", "is", "a", "list"), option("-g")));
+        }
+
+        @Test
+        void should_use_empty_array_as_default_value() {
+            assertEquals(0, OptionParsers.list(String[]::new, String::valueOf).parse(List.of(), option("-g")).length);
+        }
+    }
+
     static Option option(String value) {
         return new Option() {
             @Override
