@@ -1,7 +1,7 @@
 package yes.tdd.dojo.domain.args;
 
-public class TooManyArgumentsException extends RuntimeException {
-    public TooManyArgumentsException(Option option) {
+public class InsufficientArgumentsException extends RuntimeException {
+    public InsufficientArgumentsException(Option option) {
         super(option.value());
     }
 
