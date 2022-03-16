@@ -29,10 +29,4 @@ public class UuidBasedIdentityServiceTest {
         assertThat(identityService.nextReadable().length()).isEqualTo(18);
         assertThat(identityService.nextReadable().chars().allMatch(Character::isDigit)).isTrue();
     }
-
-    @Test
-    public void should_generate_non_duplicated_readable_identities() {
-        String id = identityService.nextReadable();
-        assertThat(identityService.nextReadable()).isNotEqualTo(id);
-    }
 }

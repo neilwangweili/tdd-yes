@@ -1,7 +1,6 @@
 package yes.tdd.usecases;
 
 import org.junit.jupiter.api.*;
-import org.springframework.http.HttpStatus;
 import yes.tdd.*;
 import yes.tdd.users.domain.*;
 
@@ -10,7 +9,7 @@ import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.OK;
 
-public class CreateUserTest extends IntegrationTest {
+public class SearchUserTest extends IntegrationTest {
     private @Resource UserRepository userRepository;
     private User john;
 
