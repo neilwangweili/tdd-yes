@@ -9,8 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BooleanOptionParserTest {
     @Test
-    public void should_not_accept_extra_argument_for_boolean_option() {
+    void should_not_accept_extra_argument_for_boolean_option() {
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> new BooleanOptionParser().parse(asList("-l", "t"),
+            option("-l")));
+        assertEquals("-l", e.getOption());
+    }
+
+    @Test
+    void should_not_accept_extra_arguments_for_boolean_option() {
+        TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> new BooleanOptionParser().parse(asList("-l", "t", "m"),
             option("-l")));
         assertEquals("-l", e.getOption());
     }
