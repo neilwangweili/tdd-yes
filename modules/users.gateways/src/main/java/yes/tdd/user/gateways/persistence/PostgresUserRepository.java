@@ -20,6 +20,13 @@ public interface PostgresUserRepository extends Repository<PostgresUser, String>
     PostgresUser findById(String id);
 
     @Override
+    default User findUserByEmail(String email) {
+        return this.findByEmail(email).asDomain();
+    }
+
+    PostgresUser findByEmail(String email);
+
+    @Override
     default void removeAll() {
         this.deleteAll();
     }
