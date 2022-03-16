@@ -3,6 +3,7 @@ package yes.tdd.dojo.domain.args;
 import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +21,11 @@ public class BooleanOptionParserTest {
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> new BooleanOptionParser().parse(asList("-l", "t", "m"),
             option("-l")));
         assertEquals("-l", e.getOption());
+    }
+
+    @Test
+    void should_set_default_value_to_false_if_option_not_present() {
+        assertFalse((Boolean) new BooleanOptionParser().parse(List.of(), option("-l")));
     }
 
     static Option option(String value) {
