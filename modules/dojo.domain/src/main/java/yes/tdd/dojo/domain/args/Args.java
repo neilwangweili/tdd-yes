@@ -16,19 +16,14 @@ public class Args {
     }
 
     private static Object parseOption(Parameter parameter, List<String> arguments) {
-        Option option = parameter.getAnnotation(Option.class);
-        Object value = null;
-        if (parameter.getType() == boolean.class) {
-            value = arguments.contains(option.value());
-        }
-        if (parameter.getType() == int.class) {
-            int index = arguments.indexOf(option.value());
-            value = Integer.parseInt(arguments.get(index + 1));
-        }
-        if (parameter.getType() == String.class) {
-            int index = arguments.indexOf(option.value());
-            value = arguments.get(index + 1);
-        }
-        return value;
+        return getOptionalParser(parameter).parse(arguments, parameter.getAnnotation(Option.class));
     }
+
+    private static final Map<Class<?>, OptionParser> PARSERS = Map.of(boolean.class, new BooleanParser(), int.class, new IntParser(),
+        String.class, new StringParser());
+
+    private static OptionParser getOptionalParser(Parameter parameter) {
+        return PARSERS.get(parameter.getType());
+    }
+
 }
