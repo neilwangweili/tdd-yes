@@ -15,9 +15,9 @@ public class SaveUserTest extends IntegrationTest {
     void should_be_able_to_save_one_user_and_find_it_by_id() {
         User john = userRepository.save(User.newInstance("John", "john.smith@email.com"));
         assertNotEquals("", john.id());
-        User finded = userRepository.findBy(john.id());
-        assertEquals(finded.id(), john.id());
-        assertEquals(finded.name(), john.name());
-        assertEquals(finded.email(), john.email());
+        User fount = userRepository.findBy(john.id());
+        assertEquals(fount.id(), john.id());
+        assertEquals(fount.name(), john.name());
+        assertEquals(fount.email(), john.email());
     }
 }
