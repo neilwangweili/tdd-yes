@@ -18,14 +18,16 @@ public class Args {
     }
 
     private static Object parseOption(Parameter parameter, List<String> arguments) {
-        Object parse = getOptionalParser(parameter).parse(arguments, parameter.getAnnotation(Option.class));
-        return parse;
+        return getOptionalParser(parameter).parse(arguments, parameter.getAnnotation(Option.class));
     }
 
     private static final Map<Class<?>, OptionParser<?>> PARSERS = Map.of(
         boolean.class, bool(),
         int.class, unary(0, Integer::parseInt),
-        String.class, unary("", String::valueOf));
+        String.class, unary("", String::valueOf),
+        String[].class, list(String[]::new, String::valueOf),
+        int[].class, list(Integer[]::new, Integer::parseInt),
+        Integer[].class, list(Integer[]::new, Integer::parseInt));
 
     private static OptionParser<?> getOptionalParser(Parameter parameter) {
         return PARSERS.get(parameter.getType());

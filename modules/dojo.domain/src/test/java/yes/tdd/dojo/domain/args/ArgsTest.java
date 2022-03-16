@@ -18,11 +18,16 @@ public class ArgsTest {
     }
 
     @Test
-    @Disabled
     void should_be_able_to_parse_list_by_args() {
         ListOptions options = Args.parse(ListOptions.class, "-g", "this", "is", "a", "list", "-d", "1", "2", "-3", "5");
         assertArrayEquals(new String[]{"this", "is", "a", "list"}, options.group());
-        assertArrayEquals(new int[]{1, 2, -3, 5}, options.decimals());
+        assertArrayEquals(new Integer[]{1, 2, -3, 5}, options.decimals());
+    }
+
+    @Test
+    void should_not_treat_negative_int_with_flag() {
+        ListOptions options = Args.parse(ListOptions.class, "-d", "1", "2", "-3", "5");
+        assertArrayEquals(new Integer[]{1, 2, -3, 5}, options.decimals());
     }
 
     @Nested

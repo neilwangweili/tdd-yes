@@ -2,9 +2,9 @@ package yes.tdd.dojo.domain.args;
 
 public class ListOptions {
     private final String[] group;
-    private final int[] decimals;
+    private final Integer[] decimals;
 
-    public ListOptions(String[] group, int[] decimals) {
+    public ListOptions(@Option("-g") String[] group, @Option("-d") Integer[] decimals) {
         this.group = group;
         this.decimals = decimals;
     }
@@ -13,7 +13,7 @@ public class ListOptions {
         return group;
     }
 
-    public int[] decimals() {
+    public Integer[] decimals() {
         return decimals;
     }
 }
