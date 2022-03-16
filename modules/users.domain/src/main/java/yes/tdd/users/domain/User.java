@@ -14,6 +14,14 @@ public final class User {
         return new User(id, name, email);
     }
 
+    public static User findById(String id, UserRepository userRepository) {
+        return userRepository.findUserById(id);
+    }
+
+    public static User findByEmail(String email, UserRepository userRepository) {
+        return userRepository.findUserByEmail(email);
+    }
+
     private User(String id, String name, String email) {
         this.id = new UserId(id);
         this.userInfo = new UserInfo(name, email);
@@ -29,5 +37,9 @@ public final class User {
 
     public String email() {
         return userInfo.email();
+    }
+
+    public void save(UserRepository userRepository) {
+        userRepository.save(this);
     }
 }

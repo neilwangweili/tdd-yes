@@ -6,7 +6,7 @@ import yes.tdd.users.domain.*;
 
 import javax.annotation.Resource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SaveUserTest extends IntegrationTest {
     private @Resource UserRepository userRepository;
@@ -14,13 +14,13 @@ public class SaveUserTest extends IntegrationTest {
 
     @BeforeEach
     void setUp() {
-        john = userRepository.save(User.newInstance("John", "john.smith@email.com"));
-        assertNotEquals("", john.id());
+        john = User.newInstance("John", "john.smith@email.com");
+        john.save(userRepository);
     }
 
     @Test
     void should_be_able_to_save_one_user_and_loaded_saved_user() {
-        User fount = userRepository.findBy(john.id());
+        User fount = User.findById(john.id(), userRepository);
         assertEquals(fount.id(), john.id());
         assertEquals(fount.name(), john.name());
         assertEquals(fount.email(), john.email());
@@ -28,7 +28,7 @@ public class SaveUserTest extends IntegrationTest {
 
     @Test
     void should_be_able_to_load_saved_user_by_email() {
-        User fount = userRepository.findUserByEmail("john.smith@email.com");
+        User fount = User.findByEmail("john.smith@email.com", userRepository);
         assertEquals(fount.id(), john.id());
         assertEquals(fount.name(), john.name());
         assertEquals(fount.email(), john.email());

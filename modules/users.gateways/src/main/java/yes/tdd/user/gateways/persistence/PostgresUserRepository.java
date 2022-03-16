@@ -13,7 +13,7 @@ public interface PostgresUserRepository extends Repository<PostgresUser, String>
     PostgresUser save(PostgresUser user);
 
     @Override
-    default User findBy(String id) {
+    default User findUserById(String id) {
         return this.findById(id).asDomain();
     }
 
