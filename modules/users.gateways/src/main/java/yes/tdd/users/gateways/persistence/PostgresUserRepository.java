@@ -4,6 +4,9 @@ import org.springframework.data.repository.Repository;
 import yes.tdd.users.domain.User;
 import yes.tdd.users.domain.UserRepository;
 
+import java.util.List;
+import java.util.stream.*;
+
 public interface PostgresUserRepository extends Repository<PostgresUser, String>, UserRepository {
     @Override
     default User save(User user) {
@@ -25,6 +28,13 @@ public interface PostgresUserRepository extends Repository<PostgresUser, String>
     }
 
     PostgresUser findByEmail(String email);
+
+    @Override
+    default List<User> findAllUsers() {
+        return this.findAll().map(PostgresUser::asDomain).collect(Collectors.toList());
+    }
+
+    Stream<PostgresUser> findAll();
 
     @Override
     default void removeAll() {

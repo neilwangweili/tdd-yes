@@ -2,7 +2,7 @@ package yes.tdd.users.gateways.ohs;
 
 import org.springframework.web.bind.annotation.*;
 import yes.tdd.users.application.*;
-import yes.tdd.users.application.vo.UserOutput;
+import yes.tdd.users.application.vo.*;
 
 import javax.annotation.Resource;
 
@@ -11,6 +11,12 @@ import javax.annotation.Resource;
 public class UserController {
     private @Resource SearchUserUseCase searchUserUseCase;
     private @Resource CreateUserUseCase createUserUseCase;
+    private @Resource SearchAllUsersUseCase searchAllUsersUseCase;
+
+    @GetMapping("/all")
+    public UserOutputs fetchAllUsers() {
+        return searchAllUsersUseCase.execute();
+    }
 
     @GetMapping("/{id}")
     public UserOutput getById(@PathVariable String id) {
