@@ -20,7 +20,7 @@ public class SearchUserTest extends IntegrationTest {
     }
 
     @Test
-    void should_be_able_to_create_one_user() {
+    void should_be_able_to_fetch_one_user() {
         TestResponse response = get("/users/" + john.id());
         assertEquals(response.statusCode(), OK);
         assertEquals(response.value("$.id"), john.id());

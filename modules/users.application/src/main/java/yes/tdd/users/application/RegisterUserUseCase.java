@@ -4,10 +4,10 @@ import yes.tdd.frameworks.application.core.UseCase;
 import yes.tdd.users.domain.*;
 
 @UseCase
-public class CreateUserUseCase {
+public class RegisterUserUseCase {
     private final UserRepository userRepository;
 
-    public CreateUserUseCase(UserRepository userRepository) {
+    public RegisterUserUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

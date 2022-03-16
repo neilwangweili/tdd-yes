@@ -14,7 +14,7 @@ public final class User {
         return new User(id, name, email);
     }
 
-    public static User findById(String id, UserRepository userRepository) {
+    public static User fetchById(String id, UserRepository userRepository) {
         return userRepository.findUserById(id);
     }
 

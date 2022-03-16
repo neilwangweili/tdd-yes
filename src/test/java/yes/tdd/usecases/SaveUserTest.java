@@ -20,7 +20,7 @@ public class SaveUserTest extends IntegrationTest {
 
     @Test
     void should_be_able_to_save_one_user_and_loaded_saved_user() {
-        User fount = User.findById(john.id(), userRepository);
+        User fount = User.fetchById(john.id(), userRepository);
         assertEquals(fount.id(), john.id());
         assertEquals(fount.name(), john.name());
         assertEquals(fount.email(), john.email());

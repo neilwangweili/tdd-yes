@@ -5,14 +5,14 @@ import yes.tdd.users.application.vo.UserOutputs;
 import yes.tdd.users.domain.*;
 
 @UseCase
-public class SearchAllUsersUseCase {
+public class FetchAllUsersUseCase {
     private final UserRepository userRepository;
 
-    public SearchAllUsersUseCase(UserRepository userRepository) {
+    public FetchAllUsersUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public UserOutputs execute() {
-        return UserOutputs.from(Users.findAll(userRepository));
+        return UserOutputs.from(Users.fetchAll(userRepository));
     }
 }

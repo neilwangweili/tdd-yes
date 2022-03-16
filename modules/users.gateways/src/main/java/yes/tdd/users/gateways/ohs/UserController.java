@@ -9,22 +9,22 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private @Resource SearchUserUseCase searchUserUseCase;
-    private @Resource CreateUserUseCase createUserUseCase;
-    private @Resource SearchAllUsersUseCase searchAllUsersUseCase;
+    private @Resource FetchUserUseCase fetchUserUseCase;
+    private @Resource RegisterUserUseCase registerUserUseCase;
+    private @Resource FetchAllUsersUseCase fetchAllUsersUseCase;
 
     @GetMapping("/all")
     public UserOutputs fetchAllUsers() {
-        return searchAllUsersUseCase.execute();
+        return fetchAllUsersUseCase.execute();
     }
 
     @GetMapping("/{id}")
-    public UserOutput getById(@PathVariable String id) {
-        return searchUserUseCase.execute(id);
+    public UserOutput fetchById(@PathVariable String id) {
+        return fetchUserUseCase.execute(id);
     }
 
     @PostMapping
     public String register(@RequestBody UserInput user) {
-        return createUserUseCase.execute(user);
+        return registerUserUseCase.execute(user);
     }
 }

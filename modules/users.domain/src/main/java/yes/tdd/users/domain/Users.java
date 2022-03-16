@@ -5,7 +5,7 @@ import java.util.List;
 public final class Users {
     private final List<User> users;
 
-    public static Users findAll(UserRepository userRepository) {
+    public static Users fetchAll(UserRepository userRepository) {
         return new Users(userRepository.findAllUsers());
     }
 

@@ -19,7 +19,7 @@ public class FindAllUsersTest extends IntegrationTest {
     }
 
     @Test
-    void should_be_able_to_find_all_users() {
+    void should_be_able_to_fetch_all_users() {
         TestResponse response = get("/users/all");
         assertEquals(response.statusCode(), OK);
         assertEquals(response.jsonValues("$.users").length, 2);

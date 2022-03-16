@@ -3,7 +3,6 @@ package yes.tdd.usecases;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.springframework.http.HttpStatus;
 import yes.tdd.*;
 import yes.tdd.users.domain.*;
 
@@ -18,10 +17,10 @@ public class RegisterUserTest extends IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({"John,john.smith@email.com"})
-    void should_be_able_to_register_a_user(String name, String email) {
+    void should_be_able_to_register_a_user_via_api(String name, String email) {
         TestResponse response = post("/users", Map.of("name", name, "email", email));
         assertEquals(response.statusCode(), OK);
-        User fount = User.findById(response.value("$"), userRepository);
+        User fount = User.fetchById(response.value("$"), userRepository);
         assertEquals(fount.name(), name);
         assertEquals(fount.email(), email);
     }
