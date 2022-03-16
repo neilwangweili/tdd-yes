@@ -5,19 +5,6 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgsTest {
-
-    @Test
-    void should_set_boolean_type_option_to_true_if_flag_present() {
-        BooleanOptions options = Args.parse(BooleanOptions.class, "-l");
-        assertTrue(options.logging());
-    }
-
-    @Test
-    void should_set_boolean_type_option_to_false_if_flag_not_present() {
-        BooleanOptions options = Args.parse(BooleanOptions.class);
-        assertFalse(options.logging());
-    }
-
     @Test
     void should_parse_int_as_option_value() {
         IntOptions options = Args.parse(IntOptions.class, "-p", "8080");

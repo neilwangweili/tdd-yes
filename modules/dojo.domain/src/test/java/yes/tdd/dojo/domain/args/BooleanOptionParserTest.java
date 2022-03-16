@@ -28,6 +28,11 @@ public class BooleanOptionParserTest {
         assertFalse(new BooleanOptionParser().parse(List.of(), option("-l")));
     }
 
+    @Test
+    void should_set_default_value_to_true_if_option_present() {
+        assertTrue(new BooleanOptionParser().parse(List.of("-l"), option("-l")));
+    }
+
     static Option option(String value) {
         return new Option() {
             @Override
