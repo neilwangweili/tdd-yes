@@ -3,7 +3,7 @@ package yes.tdd.dojo.domain.args;
 import java.util.List;
 import java.util.function.Function;
 
-public class SingleValuedOptionParser<T> implements OptionParser {
+public class SingleValuedOptionParser<T> implements OptionParser<T> {
     private final Function<String, T> valueParser;
 
     public SingleValuedOptionParser(Function<String, T> valueParser) {

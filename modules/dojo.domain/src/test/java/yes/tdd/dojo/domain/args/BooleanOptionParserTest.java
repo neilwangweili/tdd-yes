@@ -25,7 +25,7 @@ public class BooleanOptionParserTest {
 
     @Test
     void should_set_default_value_to_false_if_option_not_present() {
-        assertFalse((Boolean) new BooleanOptionParser().parse(List.of(), option("-l")));
+        assertFalse(new BooleanOptionParser().parse(List.of(), option("-l")));
     }
 
     static Option option(String value) {
