@@ -1,4 +1,4 @@
-package yes.tdd.framewors.domain.core;
+package yes.tdd.frameworks.domain.core;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

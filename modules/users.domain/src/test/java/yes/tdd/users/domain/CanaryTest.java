@@ -1,4 +1,4 @@
-package yes.tdd.basic.domain;
+package yes.tdd.users.domain;
 
 import org.junit.jupiter.api.Test;
 

@@ -5,9 +5,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import yes.tdd.framewors.domain.core.GlobalIdentityServiceResetter;
-import yes.tdd.framewors.domain.core.IdentityService;
-import yes.tdd.framewors.domain.core.UuidBasedIdentityService;
+import yes.tdd.frameworks.domain.core.GlobalIdentityServiceResetter;
+import yes.tdd.frameworks.domain.core.IdentityService;
+import yes.tdd.frameworks.domain.core.UuidBasedIdentityService;
 
 @Configuration
 @EnableScheduling

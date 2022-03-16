@@ -1,4 +1,4 @@
-package yes.tdd.framewors.domain.core;
+package yes.tdd.frameworks.domain.core;
 
 import com.fasterxml.uuid.Generators;
 import org.apache.commons.lang3.RandomUtils;

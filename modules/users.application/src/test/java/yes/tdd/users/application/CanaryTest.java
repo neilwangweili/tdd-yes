@@ -1,4 +1,4 @@
-package yes.tdd.basic.gateways;
+package yes.tdd.users.application;
 
 import org.junit.jupiter.api.Test;
 
