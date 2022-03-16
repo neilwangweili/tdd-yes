@@ -19,6 +19,12 @@ public class ArgsTest {
     }
 
     @Test
+    void should_parse_int_as_option_value() {
+        IntOptions options = Args.parse(IntOptions.class, "-p", "8080");
+        assertEquals(options.port(), 8080);
+    }
+
+    @Test
     @Disabled
     void should_be_able_to_parse_bool_int_directory_by_args() {
         Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/usr/logs");
