@@ -29,8 +29,6 @@ public abstract class IntegrationTest {
     protected TestResponse lastResponse;
     protected @Resource TestRestTemplate testRestTemplate;
 
-    // TODO: 把@MockBean写在这里，让外部service例如sftp供全局集成测试调用
-
     @BeforeEach
     void setUp() {
         assertThat(TestContainersInitializer.isRunning()).isTrue();

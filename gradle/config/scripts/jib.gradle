@@ -13,14 +13,14 @@ apply plugin: com.google.cloud.tools.jib.gradle.JibPlugin
 
 jib {
     from {
-        image = 'registry.cn-zhangjiakou.aliyuncs.com/highsoft/openjdk:11'
+        image = 'registry.cn-zhangjiakou.aliyuncs.com/neilwang.wiki/openjdk:11'
         auth {
             username = '{docker-registry-user-name}' // TODO: Use actual docker registry username instead.
             password = '{docker-registry-password}' // TODO: Use actual docker registry password instead.
         }
     }
     to {
-        image = "registry.cn-zhangjiakou.aliyuncs.com/highsoft/$project.name:latest"
+        image = "registry.cn-zhangjiakou.aliyuncs.com/neilwang.wiki/$project.name:latest"
         auth {
             username = '{docker-registry-user-name}' // TODO: Use actual docker registry username instead.
             password = '{docker-registry-password}' // TODO: Use actual docker registry password instead.
