@@ -31,9 +31,8 @@ public class ArgsTest {
     }
 
     @Test
-    @Disabled
     void should_be_able_to_parse_bool_int_directory_by_args() {
-        Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/usr/logs");
+        MutipleOptions options = Args.parse(MutipleOptions.class, "-l", "-p", "8080", "-d", "/usr/logs");
         assertTrue(options.logging());
         assertEquals(options.port(), 8080);
         assertEquals(options.directory(), "/usr/logs");

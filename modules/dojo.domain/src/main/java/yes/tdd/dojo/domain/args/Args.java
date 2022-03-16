@@ -6,9 +6,17 @@ import java.util.*;
 public class Args {
     public static <T> T parse(Class<T> optionClass, String... args) {
         Constructor<?> constructor = optionClass.getDeclaredConstructors()[0];
-        Parameter parameter = constructor.getParameters()[0];
-        Option option = parameter.getAnnotation(Option.class);
         List<String> arguments = Arrays.asList(args);
+        Object[] values = Arrays.stream(constructor.getParameters()).map(o -> parseOption(o, arguments)).toArray();
+        try {
+            return (T) constructor.newInstance(values);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Object parseOption(Parameter parameter, List<String> arguments) {
+        Option option = parameter.getAnnotation(Option.class);
         Object value = null;
         if (parameter.getType() == boolean.class) {
             value = arguments.contains(option.value());
@@ -21,10 +29,6 @@ public class Args {
             int index = arguments.indexOf(option.value());
             value = arguments.get(index + 1);
         }
-        try {
-            return (T) constructor.newInstance(value);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return value;
     }
 }
