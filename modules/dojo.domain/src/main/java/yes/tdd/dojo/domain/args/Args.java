@@ -19,8 +19,10 @@ public class Args {
         return getOptionalParser(parameter).parse(arguments, parameter.getAnnotation(Option.class));
     }
 
-    private static final Map<Class<?>, OptionParser> PARSERS = Map.of(boolean.class, new BooleanParser(), int.class, new IntParser(),
-        String.class, new StringParser());
+    private static final Map<Class<?>, OptionParser> PARSERS = Map.of(
+        boolean.class, new BooleanOptionParser(),
+        int.class, new SingleValuedOptionParser<>(Integer::parseInt),
+        String.class, new SingleValuedOptionParser<>(String::valueOf));
 
     private static OptionParser getOptionalParser(Parameter parameter) {
         return PARSERS.get(parameter.getType());
