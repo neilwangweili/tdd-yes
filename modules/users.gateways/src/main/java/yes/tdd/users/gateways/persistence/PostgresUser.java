@@ -1,4 +1,4 @@
-package yes.tdd.user.gateways.persistence;
+package yes.tdd.users.gateways.persistence;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

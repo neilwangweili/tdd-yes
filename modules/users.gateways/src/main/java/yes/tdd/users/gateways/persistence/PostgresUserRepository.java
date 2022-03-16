@@ -1,4 +1,4 @@
-package yes.tdd.user.gateways.persistence;
+package yes.tdd.users.gateways.persistence;
 
 import org.springframework.data.repository.Repository;
 import yes.tdd.users.domain.User;
