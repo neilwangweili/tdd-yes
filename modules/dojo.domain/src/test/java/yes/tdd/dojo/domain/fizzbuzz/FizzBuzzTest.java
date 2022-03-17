@@ -12,22 +12,22 @@ public class FizzBuzzTest {
 
     @Test
     void should_be_able_to_get_1_when_line_is_1() {
-        assertEquals(new FizzBuzz().generate().get(0), "1");
+        assertEquals(new FizzBuzz().generate().get(0).line(), "1");
     }
 
     @Test
     void should_be_able_to_get_fizz_when_line_is_3() {
-        assertEquals(new FizzBuzz().generate().get(2), "Fizz");
+        assertEquals(new FizzBuzz().generate().get(2).line(), "Fizz");
     }
 
     @Test
     void should_be_able_to_get_buzz_when_line_is_5() {
-        assertEquals(new FizzBuzz().generate().get(4), "Buzz");
+        assertEquals(new FizzBuzz().generate().get(4).line(), "Buzz");
     }
 
     @Test
     void should_be_able_to_get_fizzbuzz_when_line_is_15() {
-        assertEquals(new FizzBuzz().generate().get(14), "FizzBuzz");
+        assertEquals(new FizzBuzz().generate().get(14).line(), "FizzBuzz");
     }
 }
 // 3 -> Fizz
