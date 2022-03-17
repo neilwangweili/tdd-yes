@@ -9,11 +9,18 @@ public class FizzBuzzTest {
     void should_fizz_buzz_generate_100_lines() {
         assertEquals(new FizzBuzz().generate().size(), 100);
     }
+
+    @Test
+    void should_be_able_to_get_1_when_line_is_1() {
+        assertEquals(new FizzBuzz().generate().get(0), "1");
+    }
+
+    @Test
+    void should_be_able_to_get_fizz_when_line_is_3() {
+        assertEquals(new FizzBuzz().generate().get(2), "Fizz");
+    }
 }
-// 1 -> 1
-// 2 -> 2
 // 3 -> Fizz
-// 4 -> 4
 // 5 -> Buzz
 // 3的倍数 || 含有3 Fizz
 // 5的倍数 || 含有5 Buzz
