@@ -22,11 +22,11 @@ public class Unit {
             this.magnification = magnification;
         }
 
-        public Function<Double, Double> standardToLocalFormula() {
+        private Function<Double, Double> standardToLocalFormula() {
             return o -> o * magnification;
         }
 
-        public Function<Double, Double> localToStandardFormula() {
+        private Function<Double, Double> localToStandardFormula() {
             return o -> o / magnification;
         }
     }
