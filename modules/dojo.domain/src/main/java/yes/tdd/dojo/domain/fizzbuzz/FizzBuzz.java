@@ -6,6 +6,6 @@ import java.util.stream.*;
 public class FizzBuzz {
     public List<FizzBuzzLine> generate() {
         final int fizzbuzzSize = 101;
-        return IntStream.range(1, fizzbuzzSize).mapToObj(FizzBuzzLine::new).collect(Collectors.toList());
+        return IntStream.range(1, fizzbuzzSize).mapToObj(FizzBuzzLine::newInstance).collect(Collectors.toList());
     }
 }

@@ -1,9 +1,13 @@
 package yes.tdd.dojo.domain.fizzbuzz;
 
-public class FizzBuzzLine {
+public final class FizzBuzzLine {
     private final String line;
 
-    public FizzBuzzLine(int number) {
+    public static FizzBuzzLine newInstance(int number) {
+        return new FizzBuzzLine(number);
+    }
+
+    private FizzBuzzLine(int number) {
         this.line = fizzbuzzLine(number);
     }
 
