@@ -14,13 +14,12 @@ public final class OptionParsers {
 
     public static <T> OptionParser<T> unary(T defaultValue, Function<String, T> valueParser) {
         int expectedSize = 1;
-        return (arguments, option) ->
-            values(arguments, option, expectedSize).map(o -> parseValue(o.get(0), valueParser)).orElse(defaultValue);
+        return (arguments, option) -> values(arguments, option, expectedSize).map(o -> parseValue(o.get(0), valueParser)).orElse(defaultValue);
     }
 
     public static <T> OptionParser<T[]> list(IntFunction<T[]> generator, Function<String, T> valueParser) {
-        return (arguments, option) -> values(arguments, option)
-            .map(o -> o.stream().map(value -> parseValue(value, valueParser)).toArray(generator)).orElse(generator.apply(0));
+        return (arguments, option) -> values(arguments, option).map(o -> o.stream().map(value -> parseValue(value, valueParser)).toArray(generator))
+            .orElse(generator.apply(0));
     }
 
     private static Optional<List<String>> values(List<String> arguments, Option option) {
