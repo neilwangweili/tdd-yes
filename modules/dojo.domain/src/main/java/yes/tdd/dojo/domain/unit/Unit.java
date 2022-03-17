@@ -13,7 +13,7 @@ public class Unit {
     );
 
     public Unit(Double value, String unit) {
-        this.value = value;
+        this.value = value / UNIT_MAP.get(unit);
     }
 
     public Double to(String unit) {

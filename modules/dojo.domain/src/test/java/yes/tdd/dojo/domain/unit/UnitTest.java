@@ -20,4 +20,9 @@ public class UnitTest {
     void should_be_able_to_transfer_1_m_to_1_m() {
         assertEquals(new Unit(1.0, "m").to("m"), 1.0);
     }
+
+    @Test
+    void should_be_able_to_transfer_100cm_to_1_m() {
+        assertEquals(new Unit(100.0, "cm").to("m"), 1.0);
+    }
 }
