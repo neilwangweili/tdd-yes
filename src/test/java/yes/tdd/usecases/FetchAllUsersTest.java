@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.OK;
 
-public class FindAllUsersTest extends IntegrationTest {
+public class FetchAllUsersTest extends IntegrationTest {
     private @Resource UserRepository userRepository;
 
     @BeforeEach
