@@ -14,24 +14,28 @@ public class FizzBuzzTest {
 
     @Test
     void should_be_able_to_get_1_when_line_is_1() {
-        assertEquals(new FizzBuzz().generate().get(0).line(), "1");
+        test(1, "1");
     }
 
     @ParameterizedTest
     @ValueSource(ints = {3, 31})
     void should_be_able_to_get_fizz_when_line_is_multi_of_3_or_contains_3(int index) {
-        assertEquals(new FizzBuzz().generate().get(index - 1).line(), "Fizz");
+        test(index, "Fizz");
     }
 
     @ParameterizedTest
     @ValueSource(ints = {5, 56})
     void should_be_able_to_get_buzz_when_line_is_multi_of_5_or_contains_5(int index) {
-        assertEquals(new FizzBuzz().generate().get(index - 1).line(), "Buzz");
+        test(index, "Buzz");
     }
 
     @ParameterizedTest
     @ValueSource(ints = {15, 51, 30})
     void should_be_able_to_get_fizzbuzz_when_line_is_multi_of_3_or_contains_3_and_multi_of_5_or_contains_5(int index) {
-        assertEquals(new FizzBuzz().generate().get(index - 1).line(), "FizzBuzz");
+        test(index, "FizzBuzz");
+    }
+
+    private static void test(int index, String expect) {
+        assertEquals(new FizzBuzz().generate().get(index - 1).line(), expect);
     }
 }
