@@ -2,11 +2,15 @@ package yes.tdd.dojo.domain.unit;
 
 import java.util.function.Function;
 
-public class Unit {
+public final class Unit {
     private final Double value;
 
-    public Unit(Double value, UnitHub unit) {
+    private Unit(Double value, UnitHub unit) {
         this.value = unit.localToStandardFormula().apply(value);
+    }
+
+    public static Unit of(Double value, UnitHub unit) {
+        return new Unit(value, unit);
     }
 
     public Double to(UnitHub unit) {
