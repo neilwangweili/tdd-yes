@@ -16,12 +16,12 @@ public class FizzBuzzLine {
 
     private boolean isBuzz(int number) {
         final int buzzTag = 5;
-        return number % buzzTag == 0;
+        return number % buzzTag == 0 || String.valueOf(number).contains("5");
     }
 
     private boolean isFizz(int number) {
         final int fizzTag = 3;
-        return number % fizzTag == 0;
+        return number % fizzTag == 0 || String.valueOf(number).contains("3");
     }
 
     public String line() {
