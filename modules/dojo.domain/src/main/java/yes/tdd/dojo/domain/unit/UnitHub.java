@@ -1,15 +1,21 @@
 package yes.tdd.dojo.domain.unit;
 
+import java.util.function.Function;
+
 public enum UnitHub {
-    CM(100.0), DM(10.0), M(1.0);
+    CM(100), DM(10), M(1);
 
-    private final Double formula;
+    private final Integer magnification;
 
-    UnitHub(Double formula) {
-        this.formula = formula;
+    UnitHub(Integer magnification) {
+        this.magnification = magnification;
     }
 
-    public Double formula() {
-        return formula;
+    public Function<Double, Double> standardToLocalFormula() {
+        return o -> o * magnification;
+    }
+
+    public Function<Double, Double> localToStandardFormula() {
+        return o -> o / magnification;
     }
 }

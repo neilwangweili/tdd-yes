@@ -4,10 +4,10 @@ public class Unit {
     private final Double value;
 
     public Unit(Double value, UnitHub unit) {
-        this.value = value / unit.formula();
+        this.value = unit.localToStandardFormula().apply(value);
     }
 
     public Double to(UnitHub unit) {
-        return this.value * unit.formula();
+        return unit.standardToLocalFormula().apply(this.value);
     }
 }
