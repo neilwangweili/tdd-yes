@@ -12,11 +12,11 @@ public class Unit {
         "cm", CM, "dm", DM, "m", M
     );
 
-    public Unit(Double value, String unit) {
-        this.value = value / FORMULA_MAP.get(unit);
+    public Unit(Double value, UnitHub unit) {
+        this.value = value / unit.formula();
     }
 
-    public Double to(String unit) {
-        return this.value * FORMULA_MAP.get(unit);
+    public Double to(UnitHub unit) {
+        return this.value * unit.formula();
     }
 }
