@@ -3,7 +3,7 @@ package yes.tdd.dojo.domain.unit;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static yes.tdd.dojo.domain.unit.UnitHub.*;
+import static yes.tdd.dojo.domain.unit.Unit.UnitHub.*;
 
 public class UnitTest {
 
