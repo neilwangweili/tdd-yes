@@ -24,6 +24,11 @@ public class FizzBuzzTest {
     void should_be_able_to_get_buzz_when_line_is_5() {
         assertEquals(new FizzBuzz().generate().get(4), "Buzz");
     }
+
+    @Test
+    void should_be_able_to_get_fizzbuzz_when_line_is_15() {
+        assertEquals(new FizzBuzz().generate().get(14), "FizzBuzz");
+    }
 }
 // 3 -> Fizz
 // 5 -> Buzz
