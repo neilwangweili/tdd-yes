@@ -14,8 +14,7 @@ public final class Args {
     @SuppressWarnings("all")
     public static <T> T parse(Class<T> optionClass, String... args) {
         Constructor<?> constructor = optionClass.getDeclaredConstructors()[0];
-        List<String> arguments = Arrays.asList(args);
-        Object[] values = Arrays.stream(constructor.getParameters()).map(o -> parseOption(o, arguments)).toArray();
+        Object[] values = Arrays.stream(constructor.getParameters()).map(o -> parseOption(o, Arrays.asList(args))).toArray();
         return Exceptions.evaluate(() -> (T) constructor.newInstance(values));
     }
 
