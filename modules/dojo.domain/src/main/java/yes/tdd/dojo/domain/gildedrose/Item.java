@@ -7,29 +7,48 @@ public class Item {
 
     private static final Integer MAX_QUALITY = 50;
     private static final Integer MIN_QUALITY = 0;
-    private static final Integer SULFURAS_QUALITY = 80;
-    private static final Integer TEN_DAYS = 10;
-    private static final Integer FIVE_DAYS = 5;
 
-    public Item(String name, int sellIn, int quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
+    protected static Item newInstance(Item item) {
+        if (item.is("Aged Brie")) return new AgedBrieItem(item);
+        if (item.is("Sulfuras, Hand of Ragnaros")) return new SulfurasItem(item);
+        if (item.is("Backstage passes to a TAFKAL80ETC concert")) return new BackstageItem(item);
+        return new Item(item);
     }
 
     public Item(Item item) {
         this(item.name(), item.sellIn(), item.quality());
     }
 
-    public String name() {
+    public static Item newInstance(String name, int sellIn, int quality) {
+        return new Item(name, sellIn, quality);
+    }
+
+    private Item(String name, int sellIn, int quality) {
+        this.name = name;
+        this.sellIn = sellIn;
+        this.quality = quality;
+    }
+
+    public void updateQuality() {
+        passOneDay();
+        update();
+        fixQuality();
+    }
+
+    protected void update() {
+        if (this.sellIn >= MIN_QUALITY) qualityDownOne();
+        else qualityDownTwo();
+    }
+
+    private String name() {
         return name;
     }
 
-    public int sellIn() {
+    protected int sellIn() {
         return sellIn;
     }
 
-    public int quality() {
+    protected int quality() {
         return quality;
     }
 
@@ -46,40 +65,34 @@ public class Item {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
-    public void updateQuality() {
-        if (name.equals("Aged Brie")) {
-            --this.sellIn;
-            ++this.quality;
-            if (this.quality > MAX_QUALITY) this.quality = MAX_QUALITY;
-        } else if (name.equals("Sulfuras, Hand of Ragnaros")) {
-            this.quality = SULFURAS_QUALITY;
-        } else if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (sellIn <= 0) {
-                this.quality = 0;
-            } else if (sellIn <= FIVE_DAYS) {
-                final int threeQuality = 3;
-                this.quality = this.quality + threeQuality;
-            } else if (sellIn <= TEN_DAYS) {
-                this.quality = this.quality + 2;
-            } else {
-                ++this.quality;
-            }
-            --this.sellIn;
-            if (this.quality > MAX_QUALITY) this.quality = MAX_QUALITY;
-        } else {
-            --this.sellIn;
-            if (this.sellIn >= MIN_QUALITY) --this.quality;
-            else this.quality = this.quality - 2;
-            if (this.quality < MIN_QUALITY) this.quality = MIN_QUALITY;
-        }
-        if (!name.equals("Sulfuras, Hand of Ragnaros")) {
-            fixQuality();
-        }
+    private void qualityDownTwo() {
+        this.setQuality(quality() - 2);
+    }
+
+    private void qualityDownOne() {
+        this.setQuality(quality() - 1);
+    }
+
+    protected void qualityUpOne() {
+        this.setQuality(quality() + 1);
+    }
+
+    protected void qualityUpTwo() {
+        this.setQuality(quality() + 2);
+    }
+
+    protected void qualityUpThree() {
+        final int threeQuality = 3;
+        this.setQuality(quality() + threeQuality);
     }
 
     protected void fixQuality() {
         if (this.quality > MAX_QUALITY) this.quality = MAX_QUALITY;
         if (this.quality < MIN_QUALITY) this.quality = MIN_QUALITY;
+    }
+
+    protected void passOneDay() {
+        setSellIn(sellIn() - 1);
     }
 
     public boolean is(String name) {
