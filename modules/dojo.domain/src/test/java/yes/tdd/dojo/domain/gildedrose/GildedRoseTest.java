@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static yes.tdd.dojo.domain.gildedrose.Item.newInstance;
 
 public class GildedRoseTest {
     @Nested
@@ -14,29 +15,8 @@ public class GildedRoseTest {
         void should_quality_of_items_in_shop_changed_pass_one_day() {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(out);
-            printStream.println("OMGHAI!");
-            List<Item> items = List.of(
-                Item.newInstance("+5 Dexterity Vest", 10, 20), //
-                Item.newInstance("Aged Brie", 2, 0), //
-                Item.newInstance("Elixir of the Mongoose", 5, 7), //
-                Item.newInstance("Sulfuras, Hand of Ragnaros", 0, 80), //
-                Item.newInstance("Sulfuras, Hand of Ragnaros", -1, 80),
-                Item.newInstance("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                Item.newInstance("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                Item.newInstance("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
-                Item.newInstance("Conjured Mana Cake", 3, 6));
-            GildedRose app = new GildedRose(items);
-            int days = 2;
-            for (int i = 0; i < days; i++) {
-                printStream.println("-------- day " + i + " --------");
-                printStream.println("name, sellIn, quality");
-                for (Item item : app.items()) {
-                    printStream.println(item);
-                }
-                printStream.println();
-                app.updateQuality();
-            }
+            GildedRose app = gildedRose();
+            passDaysAndReportQuality(printStream, app);
             assertEquals(out.toString(), "OMGHAI!\n" +
                 "-------- day 0 --------\n" +
                 "name, sellIn, quality\n" +
@@ -62,6 +42,34 @@ public class GildedRoseTest {
                 "Backstage passes to a TAFKAL80ETC concert, 4, 50\n" +
                 "Conjured Mana Cake, 2, 5\n" +
                 "\n");
+        }
+
+        private void passDaysAndReportQuality(PrintStream printStream, GildedRose app) {
+            int days = 2;
+            printStream.println("OMGHAI!");
+            for (int i = 0; i < days; i++) {
+                printStream.println("-------- day " + i + " --------");
+                printStream.println("name, sellIn, quality");
+                for (Item item : app.items()) {
+                    printStream.println(item);
+                }
+                printStream.println();
+                app.updateQuality();
+            }
+        }
+
+        private GildedRose gildedRose() {
+            List<Item> items = List.of(
+                newInstance("+5 Dexterity Vest", 10, 20), //
+                newInstance("Aged Brie", 2, 0), //
+                newInstance("Elixir of the Mongoose", 5, 7), //
+                newInstance("Sulfuras, Hand of Ragnaros", 0, 80), //
+                newInstance("Sulfuras, Hand of Ragnaros", -1, 80),
+                newInstance("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+                newInstance("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+                newInstance("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                newInstance("Conjured Mana Cake", 3, 6));
+            return new GildedRose(items);
         }
     }
 
@@ -118,7 +126,7 @@ public class GildedRoseTest {
         }
 
         private void test(String item, int sellIn, int quality, String actual) {
-            Item commonItem = Item.newInstance(Item.newInstance(item, sellIn, quality));
+            Item commonItem = newInstance(newInstance(item, sellIn, quality));
             commonItem.updateQuality();
             assertEquals(commonItem.toString(), actual);
         }
