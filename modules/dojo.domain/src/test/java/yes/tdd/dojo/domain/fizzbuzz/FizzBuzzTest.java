@@ -2,7 +2,7 @@ package yes.tdd.dojo.domain.fizzbuzz;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,30 +12,18 @@ public class FizzBuzzTest {
         assertEquals(new FizzBuzz().generate().size(), 100);
     }
 
-    @Test
-    void should_be_able_to_get_1_when_line_is_1() {
-        test(1, "1");
-    }
-
     @ParameterizedTest
-    @ValueSource(ints = {3, 31})
-    void should_be_able_to_get_fizz_when_line_is_multi_of_3_or_contains_3(int index) {
-        test(index, "Fizz");
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {5, 56})
-    void should_be_able_to_get_buzz_when_line_is_multi_of_5_or_contains_5(int index) {
-        test(index, "Buzz");
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {15, 51, 30})
-    void should_be_able_to_get_fizzbuzz_when_line_is_multi_of_3_or_contains_3_and_multi_of_5_or_contains_5(int index) {
-        test(index, "FizzBuzz");
-    }
-
-    private static void test(int index, String expect) {
-        assertEquals(new FizzBuzz().generate().get(index - 1).line(), expect);
+    @CsvSource({
+        "1,     '1'",
+        "3,     'Fizz'",
+        "31,    'Fizz'",
+        "5,     'Buzz'",
+        "56,    'Buzz'",
+        "15,    'FizzBuzz'",
+        "51,    'FizzBuzz'",
+        "30,    'FizzBuzz'",
+    })
+    void should_be_able_to_get_fizz_when_line_is_multi_of_3_or_contains_3(int number, String expect) {
+        assertEquals(new FizzBuzz().generate().get(number - 1).line(), expect);
     }
 }
