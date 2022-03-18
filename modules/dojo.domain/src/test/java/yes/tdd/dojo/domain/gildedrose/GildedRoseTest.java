@@ -18,9 +18,7 @@ public class GildedRoseTest {
     //商品的SellIn值和Quality值，它们每天会发生变化，但是会有特例
     //商品的价格规则说明如下：
     //
-    //商品每过一天价值会下滑1点 ，一旦过了保质期，价值就以双倍的速度下滑
     //商品的价值永远不会小于0，也永远不会超过50
-    //陈年干酪（Aged Brie）是一种特殊的商品，放得越久，价值反而越高
     //萨弗拉斯（Sulfuras）是一种传奇商品，没有保质期的概念，质量也不会下滑
     //后台门票（Backstage pass）和陈年干酪（Aged Brie）有相似之处：
     //越接近演出日，商品价值Quality值反而上升
@@ -41,6 +39,34 @@ public class GildedRoseTest {
             Item commonItem = new Item("common item", 0, 10);
             commonItem.updateQuality();
             assertEquals(commonItem.toString(), "common item, -1, 8");
+        }
+
+        @Test
+        void should_be_able_to_keep_quality_to_positive_if_common_item_quality_reduce_to_negative() {
+            Item commonItem = new Item("common item", 0, 0);
+            commonItem.updateQuality();
+            assertEquals(commonItem.toString(), "common item, -1, 0");
+        }
+
+        @Test
+        void should_be_able_to_add_1_quality_if_item_is_aged_brie() {
+            Item agedBrie = new Item("Aged Brie", 10, 0);
+            agedBrie.updateQuality();
+            assertEquals(agedBrie.toString(), "Aged Brie, 9, 1");
+        }
+
+        @Test
+        void should_be_able_to_keep_quality_to_50_if_aged_brie_quality_increase_up_on_50() {
+            Item agedBrie = new Item("Aged Brie", 10, 50);
+            agedBrie.updateQuality();
+            assertEquals(agedBrie.toString(), "Aged Brie, 9, 50");
+        }
+
+        @Test
+        void should_be_able_to_keep_quality_when_item_is_sulfuras() {
+            Item item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
+            item.updateQuality();
+            assertEquals(item.toString(), "Sulfuras, Hand of Ragnaros, -1, 80");
         }
     }
 
