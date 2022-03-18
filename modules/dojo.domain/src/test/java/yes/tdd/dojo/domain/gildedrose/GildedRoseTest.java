@@ -35,6 +35,13 @@ public class GildedRoseTest {
             commonItem.updateQuality();
             assertEquals(commonItem.toString(), "common item, 9, 9");
         }
+
+        @Test
+        void should_be_able_to_reduce_2_quality_of_expired_common_item_when_pass_one_day() {
+            Item commonItem = new Item("common item", 0, 10);
+            commonItem.updateQuality();
+            assertEquals(commonItem.toString(), "common item, -1, 8");
+        }
     }
 
     @Nested

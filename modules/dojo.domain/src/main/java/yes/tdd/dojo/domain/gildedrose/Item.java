@@ -18,6 +18,7 @@ public class Item {
 
     public void updateQuality() {
         --this.sellIn;
-        --this.quality;
+        if (this.sellIn >= 0) --this.quality;
+        else this.quality = this.quality - 2;
     }
 }
