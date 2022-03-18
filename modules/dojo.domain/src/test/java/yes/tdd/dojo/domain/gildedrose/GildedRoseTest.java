@@ -28,6 +28,16 @@ public class GildedRoseTest {
     //演出前5天，价值每天上升3点
     //一旦过了演出日，价值就马上变成0
     @Nested
+    class UnitTest {
+        @Test
+        void should_be_able_to_reduce_1_quality_of_unexpired_common_item_when_pass_one_day() {
+            Item commonItem = new Item("common item", 10, 10);
+            commonItem.updateQuality();
+            assertEquals(commonItem.toString(), "common item, 9, 9");
+        }
+    }
+
+    @Nested
     class IntegrationTest {
         @Test
         @Disabled

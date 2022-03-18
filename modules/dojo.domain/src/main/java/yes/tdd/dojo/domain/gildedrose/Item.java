@@ -2,8 +2,8 @@ package yes.tdd.dojo.domain.gildedrose;
 
 public class Item {
     private final String name;
-    private final int sellIn;
-    private final int quality;
+    private int sellIn;
+    private int quality;
 
     public Item(String name, int sellIn, int quality) {
         this.name = name;
@@ -14,5 +14,10 @@ public class Item {
     @Override
     public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
+    }
+
+    public void updateQuality() {
+        --this.sellIn;
+        --this.quality;
     }
 }
