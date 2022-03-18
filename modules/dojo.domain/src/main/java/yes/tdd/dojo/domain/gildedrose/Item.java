@@ -28,7 +28,6 @@ public class Item {
             ++this.quality;
             if (this.quality > MAX_QUALITY) this.quality = MAX_QUALITY;
         } else if (name.equals("Sulfuras, Hand of Ragnaros")) {
-            --this.sellIn;
             this.quality = SULFURAS_QUALITY;
         } else if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             if (sellIn <= 0) {

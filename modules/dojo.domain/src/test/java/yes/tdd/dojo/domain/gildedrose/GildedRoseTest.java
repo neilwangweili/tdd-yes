@@ -63,10 +63,10 @@ public class GildedRoseTest {
         }
 
         @Test
-        void should_be_able_to_keep_quality_when_item_is_sulfuras() {
+        void should_be_able_to_keep_quality_and_sell_in_when_item_is_sulfuras() {
             Item item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
             item.updateQuality();
-            assertEquals(item.toString(), "Sulfuras, Hand of Ragnaros, -1, 80");
+            assertEquals(item.toString(), "Sulfuras, Hand of Ragnaros, 0, 80");
         }
 
         @Test
