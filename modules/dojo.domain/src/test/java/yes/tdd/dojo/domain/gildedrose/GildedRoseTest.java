@@ -68,12 +68,39 @@ public class GildedRoseTest {
             item.updateQuality();
             assertEquals(item.toString(), "Sulfuras, Hand of Ragnaros, -1, 80");
         }
+
+        @Test
+        void should_be_able_to_add_1_quality_of_backstage_pass_when_pass_one_day() {
+            Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 50, 10);
+            item.updateQuality();
+            assertEquals(item.toString(), "Backstage passes to a TAFKAL80ETC concert, 49, 11");
+        }
+
+        @Test
+        void should_be_able_to_add_2_quality_of_backstage_pass_when_sell_in_is_in_10() {
+            Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10);
+            item.updateQuality();
+            assertEquals(item.toString(), "Backstage passes to a TAFKAL80ETC concert, 9, 12");
+        }
+
+        @Test
+        void should_be_able_to_add_3_quality_of_backstage_pass_when_sell_in_is_in_5() {
+            Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10);
+            item.updateQuality();
+            assertEquals(item.toString(), "Backstage passes to a TAFKAL80ETC concert, 4, 13");
+        }
+
+        @Test
+        void should_be_able_to_have_none_quality_of_backstage_when_sell_in_is_0() {
+            Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10);
+            item.updateQuality();
+            assertEquals(item.toString(), "Backstage passes to a TAFKAL80ETC concert, -1, 0");
+        }
     }
 
     @Nested
     class IntegrationTest {
         @Test
-        @Disabled
         void should_quality_of_items_in_shop_changed_pass_one_day() {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(out);
