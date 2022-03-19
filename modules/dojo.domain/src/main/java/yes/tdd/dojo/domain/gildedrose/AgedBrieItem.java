@@ -6,7 +6,7 @@ public class AgedBrieItem extends Item {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         qualityUpOne();
     }
 }

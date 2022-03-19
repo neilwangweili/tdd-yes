@@ -8,7 +8,7 @@ public class SulfurasItem extends Item {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         setQuality(SULFURAS_QUALITY);
     }
 

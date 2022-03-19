@@ -9,7 +9,7 @@ public class BackstageItem extends Item {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         if (sellIn() < 0) setQuality(0);
         else if (sellIn() < FIVE_DAYS) qualityUpThree();
         else if (sellIn() < TEN_DAYS) qualityUpTwo();
