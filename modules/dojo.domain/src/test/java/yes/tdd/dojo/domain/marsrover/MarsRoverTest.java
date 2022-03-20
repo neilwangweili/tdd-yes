@@ -3,6 +3,7 @@ package yes.tdd.dojo.domain.marsrover;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static yes.tdd.dojo.domain.marsrover.Towards.N;
 
 //项目介绍
 //
@@ -35,16 +36,24 @@ public class MarsRoverTest {
             assertEquals(mars.x(), 10.0);
             assertEquals(mars.y(), 10.0);
         }
+
+        @Test
+        void should_build_a_car_by_mars_area() {
+            Mars mars = Mars.build(10.0, 10.0);
+            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
+            assertEquals(marsRover.report(), "I'm at (0.0, 0.0), towards North.");
+        }
     }
 
     @Nested
     class IntegrationTest {
         @Test
+        @Disabled
         void should_be_able_to_accept_commands_and_run_in_Mars_correctly() {
             Mars mars = Mars.build(10.0, 10.0);
-            MarsRover marsRover = MarsRover.define(mars);
+            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
             marsRover.executeCommands("f", "r", "f", "f", "b", "l", "f", "f");
-            assertEquals(marsRover.report(), "I'm at (1, 3), towards North.");
+            assertEquals(marsRover.report(), "I'm at (1.0, 3.0), towards North.");
         }
     }
 }
