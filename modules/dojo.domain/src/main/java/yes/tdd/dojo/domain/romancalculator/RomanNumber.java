@@ -35,23 +35,32 @@ public final class RomanNumber {
 
     private void process(StringBuilder result, RomanUnit unit) {
         StringBuilder cacheString = new StringBuilder();
-        if (this.number >= unit.findUpper().value() - unit.findLower().value()) {
-            cacheString.append(unit.findLower().name()).append(unit.findUpper().name());
-            this.number -= unit.findUpper().value() - unit.findLower().value();
-        } else {
-            int appearCount = 0;
-            while (this.number >= unit.value()) {
-                this.number -= unit.value();
-                appearCount++;
-                if (appearCount <= unit.maxAppearTime()) {
-                    cacheString.append(unit.name());
-                } else {
-                    appearCount = 0;
-                    cacheString = new StringBuilder(cacheString.substring(0, cacheString.length() - unit.maxAppearTime() + 1)).append(unit.findUpper().name());
-                }
-            }
-        }
+        if (isBigPart(unit)) transferBigPart(unit, cacheString);
+        else transferNumbers(unit, cacheString);
         result.append(cacheString);
+    }
+
+    private void transferBigPart(RomanUnit unit, StringBuilder cacheString) {
+        cacheString.append(unit.findLower().name()).append(unit.findUpper().name());
+        this.number -= unit.findUpper().value() - unit.findLower().value();
+    }
+
+    private void transferNumbers(RomanUnit unit, StringBuilder cacheString) {
+        int appearCount = 0;
+        while (this.number >= unit.value()) {
+            this.number -= unit.value();
+            appearCount++;
+            transferNumber(unit, cacheString, appearCount);
+        }
+    }
+
+    private void transferNumber(RomanUnit unit, StringBuilder cacheString, int appearCount) {
+        if (appearCount <= unit.maxAppearTime()) cacheString.append(unit.name());
+        else cacheString.delete(cacheString.length() - unit.maxAppearTime() + 1, cacheString.length()).append(unit.findUpper().name());
+    }
+
+    private boolean isBigPart(RomanUnit unit) {
+        return this.number >= unit.findUpper().value() - unit.findLower().value();
     }
 
     private int getNumber() {
@@ -59,27 +68,38 @@ public final class RomanNumber {
     }
 
     private RomanNumber(String number) {
-        this.number = calculate(number);
+        calculate(number);
     }
 
     private RomanNumber(int number) {
         this.number = number;
     }
 
-    private int calculate(String number) {
-        int result = 0;
-        while (number.length() > 0) {
-            if (number.length() == 1) {
-                result += valueOf(number).value();
-                number = number.substring(1);
-            } else if (valueOf(String.valueOf(number.charAt(0))).value() >= valueOf(String.valueOf(number.charAt(1))).value()) {
-                result += valueOf(String.valueOf(number.charAt(0))).value();
-                number = number.substring(1);
+    private void calculate(String romanNumber) {
+        while (romanNumber.length() > 0) {
+            if (isSmallUnitAfterBigUnit(romanNumber)) {
+                this.number += firstCharToNumber(romanNumber);
+                romanNumber = romanNumber.substring(1);
             } else {
-                result += valueOf(String.valueOf(number.charAt(1))).value() - valueOf(String.valueOf(number.charAt(0))).value();
-                number = number.substring(2);
+                this.number += secondCharMinusFirstCharToNumber(romanNumber);
+                romanNumber = romanNumber.substring(2);
             }
         }
-        return result;
+    }
+
+    private int secondCharMinusFirstCharToNumber(String romanNumber) {
+        return asNumber(romanNumber, 1) - asNumber(romanNumber, 0);
+    }
+
+    private int firstCharToNumber(String romanNumber) {
+        return asNumber(romanNumber, 0);
+    }
+
+    private int asNumber(String romanNumber, int charAt) {
+        return valueOf(String.valueOf(romanNumber.charAt(charAt))).value();
+    }
+
+    private boolean isSmallUnitAfterBigUnit(String number) {
+        return number.length() == 1 || valueOf(String.valueOf(number.charAt(0))).value() >= valueOf(String.valueOf(number.charAt(1))).value();
     }
 }

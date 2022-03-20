@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArgsTest {
     @Test
     void should_be_able_to_parse_bool_int_directory_by_args() {
-        MutipleOptions options = Args.parse(MutipleOptions.class, "-l", "-p", "8080", "-d", "/usr/logs");
+        MultipleOptions options = Args.parse(MultipleOptions.class, "-l", "-p", "8080", "-d", "/usr/logs");
         assertTrue(options.logging());
         assertEquals(options.port(), 8080);
         assertEquals(options.directory(), "/usr/logs");
