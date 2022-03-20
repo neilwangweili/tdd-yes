@@ -9,6 +9,7 @@ public class Location {
         this.area = mars;
         this.x = x;
         this.y = y;
+        area.verify(x, y);
     }
 
     public String report() {
