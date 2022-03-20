@@ -5,6 +5,8 @@ public class Location {
     private Double x;
     private Double y;
 
+    private static final Double TRAVEL_DISTANCE = 1.0;
+
     public Location(Double x, Double y, Mars mars) {
         this.area = mars;
         this.x = x;
@@ -17,11 +19,19 @@ public class Location {
     }
 
     public void towards(Degree degree) {
-        move(this.x + degree.orthogonalDecompose().getLeft(), this.y + degree.orthogonalDecompose().getRight());
+        move(this.x + horizontalAxisTravelDistance(degree), this.y + verticalAxisTravelDistance(degree));
     }
 
     public void back(Degree degree) {
-        move(this.x - degree.orthogonalDecompose().getLeft(), this.y - degree.orthogonalDecompose().getRight());
+        move(this.x - horizontalAxisTravelDistance(degree), this.y - verticalAxisTravelDistance(degree));
+    }
+
+    private double verticalAxisTravelDistance(Degree degree) {
+        return TRAVEL_DISTANCE * degree.orthogonalDecompose().getRight();
+    }
+
+    private double horizontalAxisTravelDistance(Degree degree) {
+        return TRAVEL_DISTANCE * degree.orthogonalDecompose().getLeft();
     }
 
     private void move(Double targetX, Double targetY) {
