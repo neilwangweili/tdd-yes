@@ -18,14 +18,15 @@ public final class RomanNumber {
     }
 
     private String toRomain() {
+        if (number == 0) return "N";
         int record = number;
         StringBuilder result = new StringBuilder();
-        process(result, M);
-        process(result, D);
+        process(result, M, D);
+        process(result, D, M, C);
         process(result, C, D);
-        process(result, L);
+        process(result, L, C, X);
         process(result, X, L);
-        process(result, V);
+        process(result, V, X, I);
         process(result, I, V);
         this.number = record;
         return result.toString();
@@ -47,8 +48,16 @@ public final class RomanNumber {
         result.append(cacheString);
     }
 
-    private void process(StringBuilder result, RomanUnit unit) {
-        process(result, unit, unit);
+    private void process(StringBuilder result, RomanUnit unit, RomanUnit levelUpUnit, RomanUnit levelDownUnit) {
+        StringBuilder cacheString = new StringBuilder();
+        if (number >= levelUpUnit.value() - levelDownUnit.value() && number < levelUpUnit.value()) {
+            cacheString.append(levelDownUnit.name()).append(levelUpUnit.name());
+            number -= levelUpUnit.value() - levelDownUnit.value();
+        } else if (number >= unit.value()) {
+            number -= unit.value();
+            cacheString.append(unit.name());
+        }
+        result.append(cacheString);
     }
 
     private int getNumber() {
@@ -65,8 +74,17 @@ public final class RomanNumber {
 
     private int calculate(String number) {
         int result = 0;
-        for (int i = 0; i < number.length(); i++) {
-            result += RomanUnit.valueOf(String.valueOf(number.charAt(i))).value();
+        while (number.length() > 0) {
+            if (number.length() == 1) {
+                result += valueOf(number).value();
+                number = number.substring(1);
+            } else if (valueOf(String.valueOf(number.charAt(0))).value() >= valueOf(String.valueOf(number.charAt(1))).value()) {
+                result += valueOf(String.valueOf(number.charAt(0))).value();
+                number = number.substring(1);
+            } else {
+                result += valueOf(String.valueOf(number.charAt(1))).value() - valueOf(String.valueOf(number.charAt(0))).value();
+                number = number.substring(2);
+            }
         }
         return result;
     }

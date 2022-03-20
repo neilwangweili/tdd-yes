@@ -1,6 +1,7 @@
 package yes.tdd.dojo.domain.romancalculator;
 
 public enum RomanUnit {
+    U(Integer.MAX_VALUE, Integer.MAX_VALUE),
     M(1000, Integer.MAX_VALUE),
     D(500, 1),
     C(100, 3),
