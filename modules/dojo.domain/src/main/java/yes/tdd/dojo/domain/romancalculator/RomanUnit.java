@@ -6,6 +6,8 @@ public enum RomanUnit {
     C(100, 3),
     L(50, 1),
     X(10, 3),
+    V(5, 1),
+    I(1, 3),
     N(0, 0);
 
     private final int value;

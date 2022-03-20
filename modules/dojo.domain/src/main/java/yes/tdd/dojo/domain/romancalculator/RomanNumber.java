@@ -25,6 +25,8 @@ public final class RomanNumber {
         process(result, C, D);
         process(result, L);
         process(result, X, L);
+        process(result, V);
+        process(result, I, V);
         this.number = record;
         return result.toString();
     }

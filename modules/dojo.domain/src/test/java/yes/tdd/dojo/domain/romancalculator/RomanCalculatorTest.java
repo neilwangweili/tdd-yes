@@ -18,7 +18,9 @@ public class RomanCalculatorTest {
             "'CC',  'CC',   'CD'",
             "'L',   'N',    'L'",
             "'X',   'X',    'XX'",
-            "'XX',  'XX',   'XL'"
+            "'XX',  'XX',   'XL'",
+            "'V',   'N',    'V'",
+            "'I',   'I',    'II'"
         })
         void should_be_able_to_add_two_number_correctly(String number1, String number2, String actual) {
             assertEquals(of(number1).add(of(number2)).number(), actual);
