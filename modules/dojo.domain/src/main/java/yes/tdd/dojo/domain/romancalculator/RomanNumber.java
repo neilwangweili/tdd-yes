@@ -50,7 +50,7 @@ public final class RomanNumber {
 
     private void process(StringBuilder result, RomanUnit unit, RomanUnit levelUpUnit, RomanUnit levelDownUnit) {
         StringBuilder cacheString = new StringBuilder();
-        if (number >= levelUpUnit.value() - levelDownUnit.value() && number < levelUpUnit.value()) {
+        if (number >= levelUpUnit.value() - levelDownUnit.value()) {
             cacheString.append(levelDownUnit.name()).append(levelUpUnit.name());
             number -= levelUpUnit.value() - levelDownUnit.value();
         } else if (number >= unit.value()) {
