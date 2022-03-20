@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static yes.tdd.dojo.domain.marsrover.Mars.build;
 import static yes.tdd.dojo.domain.marsrover.Towards.N;
 
 public class MarsRoverTest {
@@ -13,8 +14,7 @@ public class MarsRoverTest {
     class IntegrationTest {
         @Test
         void should_be_able_to_accept_commands_and_run_in_Mars_correctly() {
-            Mars mars = Mars.build(10.0, 10.0);
-            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
+            MarsRover marsRover = MarsRover.define(build(10.0, 10.0), N, 0.0, 0.0);
             marsRover.executeCommands("f", "r", "f", "r", "l", "r", "r", "l", "r", "l", "r", "r", "r", "r", "l", "l", "l", "l", "l", "f", "b", "l", "f", "f");
             assertEquals(marsRover.report(), "I'm at (1.0, 3.0), towards North.");
         }
@@ -24,15 +24,14 @@ public class MarsRoverTest {
     class UnitTest {
         @Test
         void should_build_an_area_in_mars() {
-            Mars mars = Mars.build(10.0, 10.0);
+            Mars mars = build(10.0, 10.0);
             assertEquals(mars.x(), 10.0);
             assertEquals(mars.y(), 10.0);
         }
 
         @Test
         void should_build_a_car_by_Mars_area() {
-            Mars mars = Mars.build(10.0, 10.0);
-            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
+            MarsRover marsRover = MarsRover.define(build(10.0, 10.0), N, 0.0, 0.0);
             assertEquals(marsRover.report(), "I'm at (0.0, 0.0), towards North.");
         }
 
@@ -63,16 +62,14 @@ public class MarsRoverTest {
             "0.0,   0.0,    #W#,    #r#,    #I'm at (0.0, 0.0), towards North.#",
         })
         void should_be_able_to_accept_one_command_and_do_it(Double x, Double y, Towards towards, String command, String actual) {
-            Mars mars = Mars.build(10.0, 10.0);
-            MarsRover marsRover = MarsRover.define(mars, towards, x, y);
+            MarsRover marsRover = MarsRover.define(build(10.0, 10.0), towards, x, y);
             marsRover.executeCommands(command);
             assertEquals(marsRover.report(), actual);
         }
 
         @Test
         void should_be_able_to_throw_exception_when_command_is_error() {
-            Mars mars = Mars.build(10.0, 10.0);
-            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
+            MarsRover marsRover = MarsRover.define(build(10.0, 10.0), N, 0.0, 0.0);
             Throwable x = catchThrowable(() -> marsRover.executeCommands("x"));
             assertThat(x).isInstanceOf(InsufficientCommandException.class).hasMessage("x");
         }
