@@ -2,8 +2,10 @@ package yes.tdd.dojo.domain.marsrover;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import static java.lang.Math.PI;
+
 public class Degree {
-    private final Double degree;
+    private Double degree;
 
     public Degree(Towards towards) {
         this.degree = towards.degree();
@@ -15,5 +17,20 @@ public class Degree {
 
     public String report() {
         return "towards " + Towards.convert(degree).report();
+    }
+
+    public void turnLeft() {
+        double ninetyDegree = PI / 2;
+        turn(ninetyDegree);
+    }
+
+    public void turnRight() {
+        final double twentyHundredAndSeventyDegree = PI * 1.5;
+        turn(twentyHundredAndSeventyDegree);
+    }
+
+    private void turn(double degree) {
+        this.degree += degree;
+        this.degree = (this.degree + (2 * PI)) % (2 * PI);
     }
 }

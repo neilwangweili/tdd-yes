@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static java.lang.Math.PI;
 
 public enum Towards {
-    N("North", PI / 2.0),
+    N("North", PI / 2),
     S("South", 3 * (PI / 2)),
     E("East", 0),
     W("West", PI);

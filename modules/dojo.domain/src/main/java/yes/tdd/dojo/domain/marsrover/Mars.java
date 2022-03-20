@@ -20,4 +20,9 @@ public class Mars {
     public double y() {
         return y;
     }
+
+    public void verify(Double targetX, Double targetY) {
+        if (targetX <= x && targetY <= y && targetX >= 0 && targetY >= 0) return;
+        throw new MarsRoverOutOfAreaException();
+    }
 }

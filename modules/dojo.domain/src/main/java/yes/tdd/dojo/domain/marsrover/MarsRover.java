@@ -14,10 +14,33 @@ public class MarsRover {
     }
 
     public void executeCommands(String... commands) {
-        this.location.towards(degree);
+        try {
+            Commands.buildFrom(commands).forEach(o -> o.accept(this));
+        } catch (MarsRoverOutOfAreaException ignore) {
+        }
     }
 
     public String report() {
         return location.report() + ", " + degree.report() + ".";
+    }
+
+    protected void towards() {
+        this.location.towards(degree);
+    }
+
+    protected void back() {
+        this.location.back(degree);
+    }
+
+    protected void turnLeft() {
+        this.degree.turnLeft();
+    }
+
+    protected void turnRight() {
+        this.degree.turnRight();
+    }
+
+    protected void errorCommand(String command) {
+        throw new InsufficientCommandException(command);
     }
 }
