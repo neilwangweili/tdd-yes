@@ -20,7 +20,7 @@ public class Degree {
     }
 
     public void turnLeft() {
-        double ninetyDegree = PI / 2;
+        final double ninetyDegree = PI / 2;
         turn(ninetyDegree);
     }
 

@@ -16,7 +16,7 @@ public class MarsRover {
     public void executeCommands(String... commands) {
         try {
             Commands.buildFrom(commands).forEach(o -> o.accept(this));
-        } catch (MarsRoverOutOfAreaException ignore) {
+        } catch (MarsRoverOutOfAreaException ignored) {
         }
     }
 
