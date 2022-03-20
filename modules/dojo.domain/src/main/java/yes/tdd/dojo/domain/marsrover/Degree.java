@@ -11,7 +11,7 @@ public class Degree {
         this.degree = towards.degree();
     }
 
-    public Pair<Double, Double> orthogonalDecomposition() {
+    public Pair<Double, Double> orthogonalDecompose() {
         return Pair.of((double) Math.round(Math.cos(degree)), (double) Math.round(Math.sin(degree)));
     }
 

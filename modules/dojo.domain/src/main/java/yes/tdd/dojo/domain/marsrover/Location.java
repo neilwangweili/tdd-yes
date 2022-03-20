@@ -17,11 +17,11 @@ public class Location {
     }
 
     public void towards(Degree degree) {
-        move(this.x + degree.orthogonalDecomposition().getLeft(), this.y + degree.orthogonalDecomposition().getRight());
+        move(this.x + degree.orthogonalDecompose().getLeft(), this.y + degree.orthogonalDecompose().getRight());
     }
 
     public void back(Degree degree) {
-        move(this.x - degree.orthogonalDecomposition().getLeft(), this.y - degree.orthogonalDecomposition().getRight());
+        move(this.x - degree.orthogonalDecompose().getLeft(), this.y - degree.orthogonalDecompose().getRight());
     }
 
     private void move(Double targetX, Double targetY) {
