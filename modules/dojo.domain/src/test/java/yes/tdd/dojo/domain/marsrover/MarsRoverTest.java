@@ -48,10 +48,10 @@ public class MarsRoverTest {
             "1.0,   1.0,    #W#,    #f#,    #I'm at (0.0, 1.0), towards West.#",
             "1.0,   1.0,    #W#,    #b#,    #I'm at (2.0, 1.0), towards West.#",
             // MarsRover out of area.
-            "0.0,   0.0,        #N#,    #b#,    #I'm at (0.0, 0.0), towards North.#",
-            "0.0,   0.0,        #E#,    #b#,    #I'm at (0.0, 0.0), towards East.#",
-            "10.0,  10.0,       #E#,    #f#,    #I'm at (10.0, 10.0), towards East.#",
-            "10.0,  10.0,       #N#,    #f#,    #I'm at (10.0, 10.0), towards North.#",
+            "0.0,   0.0,    #N#,    #b#,    #I'm at (0.0, 0.0), towards North.#",
+            "0.0,   0.0,    #E#,    #b#,    #I'm at (0.0, 0.0), towards East.#",
+            "10.0,  10.0,   #E#,    #f#,    #I'm at (10.0, 10.0), towards East.#",
+            "10.0,  10.0,   #N#,    #f#,    #I'm at (10.0, 10.0), towards North.#",
             // Turns command.
             "0.0,   0.0,    #N#,    #l#,    #I'm at (0.0, 0.0), towards West.#",
             "0.0,   0.0,    #W#,    #l#,    #I'm at (0.0, 0.0), towards South.#",
