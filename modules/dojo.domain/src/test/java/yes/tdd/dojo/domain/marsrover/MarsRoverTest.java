@@ -1,5 +1,9 @@
 package yes.tdd.dojo.domain.marsrover;
 
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 //项目介绍
 //
 //假想你在火星探索团队中负责软件开发。现在你要给登陆火星的探索小车编写控制程序，根据地球发送的控制指令来控制火星车的行动。
@@ -23,4 +27,24 @@ package yes.tdd.dojo.domain.marsrover;
 //火星地面上有障碍物，如果火星车遇到了障碍物导致后续指令受阻，应该停留在原地，放弃执行后续指令，并立即向地球回报
 //你需要自己判断，是否采纳这些需求。
 public class MarsRoverTest {
+    @Nested
+    class UnitTest {
+        @Test
+        void should_build_an_area_in_mars() {
+            Mars mars = Mars.build(10.0, 10.0);
+            assertEquals(mars.x(), 10.0);
+            assertEquals(mars.y(), 10.0);
+        }
+    }
+
+    @Nested
+    class IntegrationTest {
+        @Test
+        void should_be_able_to_accept_commands_and_run_in_Mars_correctly() {
+            Mars mars = Mars.build(10.0, 10.0);
+            MarsRover marsRover = MarsRover.define(mars);
+            marsRover.executeCommands("f", "r", "f", "f", "b", "l", "f", "f");
+            assertEquals(marsRover.report(), "I'm at (1, 3), towards North.");
+        }
+    }
 }
