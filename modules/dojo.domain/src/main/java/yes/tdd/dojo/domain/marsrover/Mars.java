@@ -22,7 +22,15 @@ public class Mars {
     }
 
     public void verify(Double targetX, Double targetY) {
-        if (targetX <= x && targetY <= y && targetX >= 0 && targetY >= 0) return;
+        if (horizontalAxisNotCrossed(targetX) && verticalAxisNotCrossed(targetY)) return;
         throw new MarsRoverOutOfAreaException();
+    }
+
+    private boolean horizontalAxisNotCrossed(Double targetX) {
+        return targetX <= x && targetX >= 0;
+    }
+
+    private boolean verticalAxisNotCrossed(Double targetY) {
+        return targetY <= y && targetY >= 0;
     }
 }
