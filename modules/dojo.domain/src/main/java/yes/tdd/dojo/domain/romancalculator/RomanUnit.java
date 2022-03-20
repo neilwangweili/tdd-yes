@@ -1,5 +1,7 @@
 package yes.tdd.dojo.domain.romancalculator;
 
+import java.util.List;
+
 public enum RomanUnit {
     U(Integer.MAX_VALUE, Integer.MAX_VALUE),
     M(1000, Integer.MAX_VALUE),
@@ -17,6 +19,16 @@ public enum RomanUnit {
     RomanUnit(int value, int maxAppearTime) {
         this.value = value;
         this.maxAppearTime = maxAppearTime;
+    }
+
+    public RomanUnit findUpper() {
+        int index = List.of(values()).indexOf(this);
+        return values()[index - 1];
+    }
+
+    public RomanUnit findLower() {
+        int index = List.of(values()).indexOf(this);
+        return values()[index + 1];
     }
 
     public int value() {
