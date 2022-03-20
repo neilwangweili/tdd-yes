@@ -9,10 +9,10 @@ public final class Commands {
     }
 
     public static Stream<Consumer<MarsRover>> buildFrom(String... commands) {
-        return Arrays.stream(commands).map(Commands::extracted);
+        return Arrays.stream(commands).map(Commands::generate);
     }
 
-    private static Consumer<MarsRover> extracted(String command) {
+    private static Consumer<MarsRover> generate(String command) {
         if (command.equals("f")) return MarsRover::towards;
         if (command.equals("b")) return MarsRover::back;
         if (command.equals("l")) return MarsRover::turnLeft;
