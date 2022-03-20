@@ -38,10 +38,19 @@ public class MarsRoverTest {
         }
 
         @Test
-        void should_build_a_car_by_mars_area() {
+        void should_build_a_car_by_Mars_area() {
             Mars mars = Mars.build(10.0, 10.0);
             MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
             assertEquals(marsRover.report(), "I'm at (0.0, 0.0), towards North.");
+        }
+
+        @Test
+        void should_be_able_to_toward_to_0_1_when_towards_N_and_accept_f_command() {
+            Mars mars = Mars.build(10.0, 10.0);
+            MarsRover marsRover = MarsRover.define(mars, N, 0.0, 0.0);
+            marsRover.executeCommands("f");
+            System.out.println(Math.cos(Math.PI / 2));
+            assertEquals(marsRover.report(), "I'm at (0.0, 1.0), towards North.");
         }
     }
 

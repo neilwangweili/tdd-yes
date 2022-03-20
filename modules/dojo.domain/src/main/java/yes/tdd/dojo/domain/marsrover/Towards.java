@@ -2,8 +2,13 @@ package yes.tdd.dojo.domain.marsrover;
 
 import java.util.Arrays;
 
+import static java.lang.Math.PI;
+
 public enum Towards {
-    N("North", 0), S("South", Math.PI), E("East", Math.PI / 2), W("West", 3 * (Math.PI / 2));
+    N("North", PI / 2.0),
+    S("South", 3 * (PI / 2)),
+    E("East", 0),
+    W("West", PI);
 
     private final String name;
     private final double degree;
