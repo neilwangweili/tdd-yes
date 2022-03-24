@@ -69,8 +69,7 @@ public class MarsRoverTest {
 
         @Test
         void should_be_able_to_throw_exception_when_command_is_error() {
-            MarsRover marsRover = MarsRover.define(build(10.0, 10.0), N, 0.0, 0.0);
-            Throwable x = catchThrowable(() -> marsRover.executeCommands("x"));
+            Throwable x = catchThrowable(() -> MarsRover.define(build(10.0, 10.0), N, 0.0, 0.0).executeCommands("x"));
             assertThat(x).isInstanceOf(InsufficientCommandException.class).hasMessage("x");
         }
     }
