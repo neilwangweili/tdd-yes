@@ -3,12 +3,16 @@ package yes.tdd.dojo.domain.args;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.InOrder;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static yes.tdd.dojo.domain.args.OptionParsers.*;
 
 public class OptionParserTest {
@@ -28,6 +32,13 @@ public class OptionParserTest {
             InsufficientArgumentsException e = assertThrows(InsufficientArgumentsException.class, () ->
                 unary(0, Integer::parseInt).parse(asList(arguments.split(" ")), option("-p")));
             assertEquals(e.getOption(), "-p");
+        }
+
+        @Test
+        void should_parse_value_if_flag_present() {
+            Function<String, Object> parser = mock(Function.class);
+            unary(any(), parser).parse(asList("-p", "8080"), option("-p"));
+            verify(parser).apply("8080");
         }
 
         @Test
@@ -96,7 +107,13 @@ public class OptionParserTest {
 
         @Test
         void should_parse_list_value() {
-            assertArrayEquals(new String[]{"this", "is", "a", "list"}, OptionParsers.list(String[]::new, String::valueOf).parse(asList("-g", "this", "is", "a", "list"), option("-g")));
+            Function<String, Object> parser = mock(Function.class);
+            OptionParsers.list(Object[]::new, parser).parse(asList("-g", "this", "is", "a", "list"), option("-g"));
+            InOrder order = inOrder(parser);
+            order.verify(parser).apply("this");
+            order.verify(parser).apply("is");
+            order.verify(parser).apply("a");
+            order.verify(parser).apply("list");
         }
 
         @Test
