@@ -1,9 +1,9 @@
 package yes.tdd.dojo.domain.year;
 
 public final class Year {
-    private static final int FOR_HUNDRED_YEAR = 400;
-    private static final int HUNDRED_YEAR = 100;
-    private static final int LEAP_YEAR = 4;
+    private static final Integer FOR_HUNDRED_YEAR = 400;
+    private static final Integer HUNDRED_YEAR = 100;
+    private static final Integer LEAP_YEAR = 4;
 
     private final Integer year;
 
