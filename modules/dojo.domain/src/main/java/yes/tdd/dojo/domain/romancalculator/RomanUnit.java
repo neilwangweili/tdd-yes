@@ -1,6 +1,7 @@
 package yes.tdd.dojo.domain.romancalculator;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public enum RomanUnit {
     U(Integer.MAX_VALUE, Integer.MAX_VALUE),
@@ -19,6 +20,10 @@ public enum RomanUnit {
     RomanUnit(int value, int maxAppearTime) {
         this.value = value;
         this.maxAppearTime = maxAppearTime;
+    }
+
+    public static Predicate<RomanUnit> filter() {
+        return o -> o != U && o != N;
     }
 
     public RomanUnit findUpper() {

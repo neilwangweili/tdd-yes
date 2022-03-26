@@ -20,7 +20,7 @@ public final class RomanNumber {
     }
 
     private String toRomain() {
-        if (number == 0) return "N";
+        if (number == 0) return N.name();
         int record = number;
         StringBuilder result = process();
         this.number = record;
@@ -29,7 +29,7 @@ public final class RomanNumber {
 
     private StringBuilder process() {
         StringBuilder result = new StringBuilder();
-        Arrays.stream(values()).filter(o -> o != U && o != N).forEach(o -> this.process(result, o));
+        Arrays.stream(values()).filter(filter()).forEach(o -> this.process(result, o));
         return result;
     }
 
