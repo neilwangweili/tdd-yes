@@ -12,7 +12,7 @@ public final class Year {
     }
 
     private Year(Integer year) {
-        if (year < 0) throw new InsufficientYearException("Year must be positive.");
+        if (year < 0) throw new IllegalYearException("Year must be positive.");
         this.year = year;
     }
 

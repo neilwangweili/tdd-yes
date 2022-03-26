@@ -23,6 +23,6 @@ public class YearTest {
     @Test
     void should_throw_exception_when_number_is_negative() {
         Throwable throwable = catchThrowable(() -> of(-2));
-        assertThat(throwable).isInstanceOf(InsufficientYearException.class).hasMessage("Year must be positive.");
+        assertThat(throwable).isInstanceOf(IllegalYearException.class).hasMessage("Year must be positive.");
     }
 }

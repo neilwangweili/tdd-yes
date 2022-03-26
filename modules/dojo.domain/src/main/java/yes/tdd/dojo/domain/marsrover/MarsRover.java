@@ -41,6 +41,6 @@ public class MarsRover {
     }
 
     protected void errorCommand(String command) {
-        throw new InsufficientCommandException(command);
+        throw new IllegalCommandException(command);
     }
 }
