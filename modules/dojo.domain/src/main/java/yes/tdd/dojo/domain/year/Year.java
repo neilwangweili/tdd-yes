@@ -15,7 +15,6 @@ public final class Year {
         this.year = year;
     }
 
-
     public boolean isLeap() {
         if (year % FOR_HUNDRED_YEAR == 0) return true;
         if (year % HUNDRED_YEAR == 0) return false;
