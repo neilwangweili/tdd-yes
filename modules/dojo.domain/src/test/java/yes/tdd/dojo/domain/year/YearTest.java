@@ -1,9 +1,12 @@
 package yes.tdd.dojo.domain.year;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static yes.tdd.dojo.domain.year.Year.of;
 
 public class YearTest {
     @ParameterizedTest
@@ -14,6 +17,12 @@ public class YearTest {
         "2012,  'true'"
     })
     void should_be_able_to_find_one_year_is_leap_year(Integer year, boolean isLeap) {
-        assertEquals(Year.of(year).isLeap(), isLeap);
+        assertEquals(of(year).isLeap(), isLeap);
+    }
+
+    @Test
+    void should_throw_exception_when_number_is_negative() {
+        Throwable throwable = catchThrowable(() -> of(-2));
+        assertThat(throwable).isInstanceOf(InsufficientYearException.class).hasMessage("Year must be positive.");
     }
 }
