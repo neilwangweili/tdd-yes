@@ -22,8 +22,12 @@ public class DomainField<T> {
         verify();
     }
 
-    protected T get() {
+    public T get() {
         return field;
+    }
+
+    public int maxSize() {
+        return maxSize;
     }
 
     protected void set(T field) {
@@ -46,8 +50,13 @@ public class DomainField<T> {
     private final Map<Class<?>, Predicate<DomainField<?>>> consumerMap = ImmutableMap.of(
         String.class, string(),
         Collection.class, collection(),
+        Integer.class, integer(),
         Object.class, object()
     );
+
+    protected Predicate<DomainField<?>> integer() {
+        return o -> (Integer) o.get() <= maxSize;
+    }
 
     protected Predicate<DomainField<?>> collection() {
         return o -> ((Collection<?>) o.get()).size() <= maxSize;
