@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.*;
 class AgeTest {
     @Test
     void should_throw_exception_when_age_is_negative() {
-        Throwable throwable = catchThrowable(() -> new Age(0));
-        assertThat(throwable).isInstanceOf(IllegalArgumentException.class).hasMessage("error.age-is-negative");
+        assertThat(catchThrowable(() -> new Age(0))).isInstanceOf(IllegalArgumentException.class).hasMessage("error.age-is-negative");
     }
 }
