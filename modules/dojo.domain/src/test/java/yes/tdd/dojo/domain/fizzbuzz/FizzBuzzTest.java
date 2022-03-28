@@ -2,7 +2,7 @@ package yes.tdd.dojo.domain.fizzbuzz;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +23,7 @@ public class FizzBuzzTest {
         "51,    'FizzBuzz'",
         "30,    'FizzBuzz'",
     })
-    void should_be_able_to_get_fizz_when_line_is_multi_of_3_or_contains_3(int number, String expect) {
+    void should_be_able_to_get_true_word(int number, String expect) {
         assertEquals(new FizzBuzz().generate().get(number - 1).line(), expect);
     }
 }

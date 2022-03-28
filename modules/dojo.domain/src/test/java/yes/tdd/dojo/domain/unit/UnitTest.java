@@ -3,6 +3,7 @@ package yes.tdd.dojo.domain.unit;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import yes.tdd.dojo.domain.unit.Unit.UnitHub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static yes.tdd.dojo.domain.unit.Unit.UnitHub.*;
@@ -27,7 +28,7 @@ public class UnitTest {
             "100.0, 'CM',   'M',    1.0",
             "10.0,  'DM',   'M',    1.0"
         })
-        void should_be_able_to_transfer_correctly(double sourceValue, Unit.UnitHub sourceUnit, Unit.UnitHub targetUnit, double actual) {
+        void should_be_able_to_transfer_correctly(double sourceValue, UnitHub sourceUnit, UnitHub targetUnit, double actual) {
             assertEquals(Unit.of(sourceValue, sourceUnit).to(targetUnit), actual);
         }
     }
