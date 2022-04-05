@@ -3,12 +3,12 @@ package yes.tdd.dojo.domain.lifegame;
 public class CellGame {
     private final int x;
     private final int y;
-    private final String input;
+    private final Cells cells;
 
     public CellGame(int x, int y, String input) {
         this.x = x;
         this.y = y;
-        this.input = input;
+        this.cells = new Cells(input, x, y);
     }
 
     public static CellGameBuilder build(int x, int y) {
@@ -20,10 +20,7 @@ public class CellGame {
     }
 
     public String show() {
-        return "........\n" +
-            "...**...\n" +
-            "...**...\n" +
-            "........";
+        return cells.show();
     }
 
     public static class CellGameBuilder {

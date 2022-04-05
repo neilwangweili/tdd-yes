@@ -10,7 +10,7 @@ public class LifeGameTest {
         @Test
         @Disabled
         void should_be_able_to_calculate_next_frame() {
-            CellGame cellGame = CellGame.build(4, 8).newGame("........\n" +
+            CellGame cellGame = CellGame.build(8, 4).newGame("........\n" +
                 "....*...\n" +
                 "...**...\n" +
                 "........"
@@ -20,6 +20,19 @@ public class LifeGameTest {
                 "...**...\n" +
                 "...**...\n" +
                 "........");
+        }
+    }
+
+    @Nested
+    class UnitTest {
+        @Test
+        void should_be_able_to_show_correct_frame_by_giving_string() {
+            String input = "........\n" +
+                "....*...\n" +
+                "...**...\n" +
+                "........";
+            CellGame cellGame = CellGame.build(8, 4).newGame(input);
+            assertEquals(cellGame.show(), input);
         }
     }
 }
