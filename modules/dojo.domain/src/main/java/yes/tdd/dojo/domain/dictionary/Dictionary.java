@@ -6,6 +6,6 @@ public class Dictionary {
     }
 
     public String convert(String target) {
-        return "temporary here comes the name Neil Wang";
+        return "";
     }
 }
