@@ -3,7 +3,7 @@ package yes.tdd.dojo.domain.lags;
 public final class Order implements Comparable<Order> {
     private final Plane plane;
     private final Time time;
-    private final Integer pay;
+    private final Pay pay;
 
     public static Order of(String plane, Integer startTime, Integer duration, Integer pay) {
         return new Order(plane, startTime, duration, pay);
@@ -12,7 +12,7 @@ public final class Order implements Comparable<Order> {
     private Order(String plane, Integer startTime, Integer duration, Integer pay) {
         this.plane = new Plane(plane);
         this.time = new Time(startTime, duration);
-        this.pay = pay;
+        this.pay = new Pay(pay);
     }
 
     public String plane() {
@@ -20,7 +20,7 @@ public final class Order implements Comparable<Order> {
     }
 
     public Integer pay() {
-        return pay;
+        return pay.pay();
     }
 
     public boolean startBefore(Order o) {
