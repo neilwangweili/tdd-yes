@@ -25,7 +25,7 @@ public class Dictionary {
     }
 
     private String convertTarget(String target) {
-        int firstIndex = target.indexOf(TARGET_MARKER);
+        int firstIndex = indexOfMarker(target);
         target = target.replaceFirst("\\$", "");
         target = leftPart(target, firstIndex) + replacement(target, firstIndex) + rightPart(target);
         return target;
@@ -38,11 +38,15 @@ public class Dictionary {
     }
 
     private String replacementString(String target, int firstIndex) {
-        return target.substring(firstIndex, target.indexOf(TARGET_MARKER));
+        return target.substring(firstIndex, indexOfMarker(target));
     }
 
     private String rightPart(String target) {
-        return target.substring(target.indexOf(TARGET_MARKER) + 1);
+        return target.substring(indexOfMarker(target) + 1);
+    }
+
+    private int indexOfMarker(String target) {
+        return target.indexOf(TARGET_MARKER);
     }
 
     private String leftPart(String target, int firstIndex) {
