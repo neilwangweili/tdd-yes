@@ -15,7 +15,15 @@ public class PaymentsTest {
                 Order.of("AF515", 5, 9, 7),
                 Order.of("BA01", 6, 9, 8)
             );
-            assertEquals(payments.findBest(), "The best choices is: AF514 BA01. The gain is 18");
+            assertEquals(payments.findBest(), "The best choices is: AF514 BA01. The gain is 18.");
+        }
+    }
+
+    @Nested
+    class UnitTest {
+        @Test
+        void should_be_able_to_tell_us_if_giving_empty_orders() {
+            assertEquals(Payments.create().findBest(), "No order.");
         }
     }
 }
