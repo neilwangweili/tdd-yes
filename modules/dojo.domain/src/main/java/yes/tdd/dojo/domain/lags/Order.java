@@ -1,6 +1,6 @@
 package yes.tdd.dojo.domain.lags;
 
-public final class Order {
+public final class Order implements Comparable<Order> {
     private final String plane;
     private final Integer startTime;
     private final Integer duration;
@@ -21,15 +21,20 @@ public final class Order {
         return plane;
     }
 
-    public Integer startTime() {
-        return startTime;
-    }
-
-    public Integer duration() {
-        return duration;
-    }
-
     public Integer pay() {
         return pay;
+    }
+
+    private Integer endTime() {
+        return startTime + duration;
+    }
+
+    public boolean startBefore(Order currentOrder) {
+        return this.startTime >= currentOrder.endTime();
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return this.startTime - o.startTime;
     }
 }

@@ -13,14 +13,49 @@ public final class Payments extends DomainField<List<Order>> {
     private Payments(Order[] orders) {
         super(
             Arrays.stream(orders)
+                .sorted()
                 .collect(Collectors.toList()),
             "The payments are too large!"
         );
     }
 
     public String findBest() {
-        if (empty()) return "No order.";
-        return report(orders());
+        if (orders().isEmpty()) return "No order.";
+        return report(findBestOrders());
+    }
+
+    private List<Order> findBestOrders() {
+        return findBestOrders(orders());
+    }
+
+    private List<Order> findBestOrders(List<Order> orders) {
+        if (orders.isEmpty()) return new ArrayList<>();
+        return findBestOrders(ordersWithCurrentOrder(orders), ordersWithoutCurrentOrder(orders)).stream().sorted().collect(Collectors.toList());
+    }
+
+    private List<Order> findBestOrders(List<Order> ordersWithCurrentOrder, List<Order> ordersWithoutCurrentOrder) {
+        return sum(ordersWithCurrentOrder) > sum(ordersWithoutCurrentOrder) ? ordersWithCurrentOrder : ordersWithoutCurrentOrder;
+    }
+
+    private List<Order> ordersWithoutCurrentOrder(List<Order> orders) {
+        return findBestOrders(buildOrdersWithoutCurrentOrder(orders));
+    }
+
+    private List<Order> ordersWithCurrentOrder(List<Order> orders) {
+        Order currentOrder = orders.get(0);
+        List<Order> result = findBestOrders(buildOrdersRemainingByStart(currentOrder));
+        result.add(currentOrder);
+        return result;
+    }
+
+    private List<Order> buildOrdersWithoutCurrentOrder(List<Order> orders) {
+        List<Order> ordersWithoutCurrentOrder = new ArrayList<>(orders);
+        ordersWithoutCurrentOrder.remove(0);
+        return ordersWithoutCurrentOrder;
+    }
+
+    private List<Order> buildOrdersRemainingByStart(Order currentOrder) {
+        return orders().stream().filter(o -> o.startBefore(currentOrder)).collect(Collectors.toList());
     }
 
     private String report(List<Order> orders) {
@@ -32,14 +67,10 @@ public final class Payments extends DomainField<List<Order>> {
     }
 
     private String names(List<Order> orders) {
-        return orders.stream().map(Order::plane).collect(Collectors.joining(" "));
-    }
-
-    private boolean empty() {
-        return orders().size() == 0;
+        return orders.stream().map(Order::plane).collect(Collectors.joining(" -> "));
     }
 
     private List<Order> orders() {
-        return super.get();
+        return new ArrayList<>(super.get());
     }
 }
