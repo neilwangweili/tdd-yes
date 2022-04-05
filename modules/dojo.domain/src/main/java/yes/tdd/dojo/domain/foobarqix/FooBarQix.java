@@ -6,23 +6,37 @@ public class FooBarQix {
     private static final int INT_FOO_TAG = 3;
     private static final int INT_BAR_TAG = 5;
     private static final int INT_QIX_TAG = 7;
+    private static final String STAR = "0";
     private final String line;
 
     public FooBarQix(Integer giving) {
         String givingString = giving.toString();
         StringBuilder result = new StringBuilder();
         while (StringUtils.isNotEmpty(givingString)) {
-            StringBuilder builder = build(Integer.valueOf(givingString));
-            if (builder.toString().isEmpty() && !givingString.contains("0")) builder = new StringBuilder(givingString);
-            if (builder.toString().isEmpty()) builder = new StringBuilder(givingString.substring(0, givingString.indexOf("0")));
-            result.append(builder);
-            if (!givingString.contains("0")) givingString = "";
-            else {
-                givingString = givingString.substring(givingString.indexOf("0") + 1);
-                result.append("*");
-            }
+            appendNums(givingString, result);
+            givingString = produceGivingString(givingString, result);
         }
         this.line = result.toString();
+    }
+
+    private void appendNums(String givingString, StringBuilder result) {
+        StringBuilder builder = build(Integer.valueOf(givingString));
+        if (isEmpty(builder) && !givingString.contains(STAR)) builder = new StringBuilder(givingString);
+        if (isEmpty(builder)) builder = new StringBuilder(givingString.substring(0, givingString.indexOf(STAR)));
+        result.append(builder);
+    }
+
+    private String produceGivingString(String givingString, StringBuilder result) {
+        if (!givingString.contains(STAR)) givingString = "";
+        else {
+            givingString = givingString.substring(givingString.indexOf(STAR) + 1);
+            result.append("*");
+        }
+        return givingString;
+    }
+
+    private boolean isEmpty(StringBuilder builder) {
+        return builder.toString().isEmpty();
     }
 
     private StringBuilder build(Integer giving) {
