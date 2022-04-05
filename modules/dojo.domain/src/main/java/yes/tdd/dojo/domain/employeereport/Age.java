@@ -2,6 +2,8 @@ package yes.tdd.dojo.domain.employeereport;
 
 import yes.tdd.frameworks.domain.core.DomainField;
 
+import java.util.function.Predicate;
+
 public class Age extends DomainField<Integer> {
     public static final int ADULT_AGE = 18;
 
@@ -19,5 +21,9 @@ public class Age extends DomainField<Integer> {
 
     public String report() {
         return age().toString();
+    }
+
+    protected Predicate<DomainField<?>> integer() {
+        return o -> (Integer) o.get() > 0;
     }
 }

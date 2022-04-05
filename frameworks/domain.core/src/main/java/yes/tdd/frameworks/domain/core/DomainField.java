@@ -55,7 +55,7 @@ public class DomainField<T> {
     );
 
     protected Predicate<DomainField<?>> integer() {
-        return o -> (Integer) o.get() > maxSize;
+        return o -> (Integer) o.get() >= maxSize;
     }
 
     protected Predicate<DomainField<?>> collection() {
