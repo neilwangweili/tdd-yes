@@ -1,12 +1,16 @@
 package yes.tdd.dojo.domain.lags;
 
-public class Order {
+public final class Order {
     private final String plane;
     private final Integer startTime;
     private final Integer duration;
     private final Integer pay;
 
-    public Order(String plane, Integer startTime, Integer duration, Integer pay) {
+    public static Order of(String plane, Integer startTime, Integer duration, Integer pay) {
+        return new Order(plane, startTime, duration, pay);
+    }
+
+    private Order(String plane, Integer startTime, Integer duration, Integer pay) {
         this.plane = plane;
         this.startTime = startTime;
         this.duration = duration;
