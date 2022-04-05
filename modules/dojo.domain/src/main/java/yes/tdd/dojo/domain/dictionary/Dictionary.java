@@ -3,6 +3,7 @@ package yes.tdd.dojo.domain.dictionary;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Dictionary {
     private static final String TARGET_MARKER = "$";
@@ -15,8 +16,7 @@ public class Dictionary {
 
     @SafeVarargs
     public Dictionary(Pair<String, String>... elements) {
-        dictionary = new HashMap<>();
-        Arrays.stream(elements).forEach(o -> dictionary.put(o.getKey(), o.getValue()));
+        dictionary = Arrays.stream(elements).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
     }
 
     public String convert(String target) {
