@@ -16,7 +16,7 @@ public class DictionaryTest {
     @CsvSource({
         "'',                                        ''",
         "'$temp$',                                  'Temporary'",
-//        "'$temp$ here comes the name $name$',       'Temporary here comes the name Neil Wang'"
+        "'$temp$ here comes the name $name$',       'Temporary here comes the name Neil Wang'"
     })
     void should_be_able_to_convert_string_to_expect_string(String original, String expect) {
         assertEquals(dictionary.convert(original), expect);

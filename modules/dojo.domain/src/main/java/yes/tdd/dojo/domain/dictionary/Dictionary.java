@@ -19,7 +19,14 @@ public class Dictionary {
     }
 
     public String convert(String target) {
-        if (target.isEmpty()) return target;
-        return dictionary.get(target.replaceAll("\\$", ""));
+        while (target.contains("$")) {
+            int firstIndex = target.indexOf("$");
+            target = target.replaceFirst("\\$", "");
+            String left = target.substring(0, firstIndex);
+            String replacement = dictionary.get(target.substring(firstIndex, target.indexOf("$")));
+            String right = target.substring(target.indexOf("$") + 1);
+            target = left + replacement + right;
+        }
+        return target;
     }
 }
