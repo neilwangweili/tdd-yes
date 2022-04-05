@@ -7,11 +7,25 @@ public class FooBarQix {
     private final String line;
 
     public FooBarQix(Integer giving) {
-        StringBuilder stringBuilder = new StringBuilder();
-        build(stringBuilder, giving, INT_FOO_TAG, "Foo");
-        build(stringBuilder, giving, INT_BAR_TAG, "Bar");
-        build(stringBuilder, giving, INT_QIX_TAG, "Qix");
-        this.line = stringBuilder.toString().isBlank() ? giving.toString() : stringBuilder.toString();
+        if (!giving.toString().contains("0")) {
+            StringBuilder stringBuilder = build(giving);
+            this.line = stringBuilder.toString().isBlank() ? giving.toString() : stringBuilder.toString();
+        } else {
+            String result = giving.toString();
+            while (result.contains("0")) {
+                StringBuilder stringBuilder = build(giving).append("*");
+                result = stringBuilder + result.substring(0, result.indexOf("0") + 1);
+            }
+            this.line = result;
+        }
+    }
+
+    private StringBuilder build(Integer giving) {
+        StringBuilder builder = new StringBuilder();
+        build(builder, giving, INT_FOO_TAG, "Foo");
+        build(builder, giving, INT_BAR_TAG, "Bar");
+        build(builder, giving, INT_QIX_TAG, "Qix");
+        return builder;
     }
 
     private void build(StringBuilder stringBuilder, Integer giving, Integer tag, String append) {

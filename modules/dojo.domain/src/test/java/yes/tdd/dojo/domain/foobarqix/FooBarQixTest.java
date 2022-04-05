@@ -11,7 +11,7 @@ public class FooBarQixTest {
         "1,     '1'",
         "9,     'Foo'",
         "3,     'FooFoo'",
-        "10,    'Bar'",
+        "10,    'Bar*'",
         "5,     'BarBar'",
         "14,    'Qix'",
         "7,     'QixQix'"
@@ -20,3 +20,4 @@ public class FooBarQixTest {
         assertEquals(new FooBarQix(giving).toString(), expect);
     }
 }
+
