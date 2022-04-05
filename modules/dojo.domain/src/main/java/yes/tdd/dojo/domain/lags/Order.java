@@ -1,7 +1,7 @@
 package yes.tdd.dojo.domain.lags;
 
 public final class Order implements Comparable<Order> {
-    private final String plane;
+    private final Plane plane;
     private final Integer startTime;
     private final Integer duration;
     private final Integer pay;
@@ -11,14 +11,14 @@ public final class Order implements Comparable<Order> {
     }
 
     private Order(String plane, Integer startTime, Integer duration, Integer pay) {
-        this.plane = plane;
+        this.plane = new Plane(plane);
         this.startTime = startTime;
         this.duration = duration;
         this.pay = pay;
     }
 
     public String plane() {
-        return plane;
+        return plane.plane();
     }
 
     public Integer pay() {

@@ -31,6 +31,10 @@ public class DomainField<T> {
         verify();
     }
 
+    protected int maxSize() {
+        return maxSize;
+    }
+
     private void verify() {
         basicVerify();
         rewritableVerify();
