@@ -12,6 +12,7 @@ public class FooBarQix {
         if (giving % INT_FOO_TAG == 0) stringBuilder.append("Foo");
         if (giving.toString().contains(STR_FOO_TAG)) stringBuilder.append("Foo");
         if (giving % INT_BAR_TAG == 0) stringBuilder.append("Bar");
+        if (giving.toString().contains(STR_BAR_TAG)) stringBuilder.append("Bar");
         this.line = stringBuilder.toString().isBlank() ? giving.toString() : stringBuilder.toString();
     }
 

@@ -11,7 +11,8 @@ public class FooBarQixTest {
         "1,     '1'",
         "9,     'Foo'",
         "3,     'FooFoo'",
-        "10,    'Bar'"
+        "10,    'Bar'",
+        "5,     'BarBar'"
     })
     void should_be_able_to_convert_to_foo_bar_qix_string_by_giving_number(Integer giving, String expect) {
         assertEquals(new FooBarQix(giving).toString(), expect);
