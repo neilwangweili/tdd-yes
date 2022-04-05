@@ -1,12 +1,13 @@
 package yes.tdd.dojo.domain.dictionary;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DictionaryTest {
 
-    private final Dictionary dictionary = Dictionary.build("temp", "temporary", "name", "Neil Wang");
+    private final Dictionary dictionary = Dictionary.build(Pair.of("temp", "temporary"), Pair.of("name", "Neil Wang"));
 
     @Nested
     class IntegrationTest {
