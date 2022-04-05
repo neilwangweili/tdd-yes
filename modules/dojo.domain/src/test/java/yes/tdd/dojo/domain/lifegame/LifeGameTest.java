@@ -8,7 +8,6 @@ public class LifeGameTest {
     @Nested
     class IntegrationTest {
         @Test
-        @Disabled
         void should_be_able_to_calculate_next_frame() {
             CellGame cellGame = CellGame.build(8, 4).newGame("........\n" +
                 "....*...\n" +
@@ -33,6 +32,34 @@ public class LifeGameTest {
                 "........";
             CellGame cellGame = CellGame.build(8, 4).newGame(input);
             assertEquals(cellGame.show(), input);
+        }
+
+        @Test
+        void should_be_able_to_show_frame_when_dead_resurrect() {
+            String input = ".....\n" +
+                ".***.\n" +
+                ".*...\n" +
+                ".....";
+            CellGame cellGame = CellGame.build(5, 4).newGame(input);
+            cellGame.nextFrame();
+            assertEquals(cellGame.show(), ".....\n" +
+                ".**..\n" +
+                ".**..\n" +
+                ".....");
+        }
+
+        @Test
+        void should_be_able_to_show_frame_when_too_overcrowding_dead() {
+            String input = ".....\n" +
+                ".***.\n" +
+                ".**..\n" +
+                ".....";
+            CellGame cellGame = CellGame.build(5, 4).newGame(input);
+            cellGame.nextFrame();
+            assertEquals(cellGame.show(), ".....\n" +
+                ".*.*.\n" +
+                ".*.*.\n" +
+                ".....");
         }
     }
 }

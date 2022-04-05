@@ -1,7 +1,7 @@
 package yes.tdd.dojo.domain.lifegame;
 
 public class CellGame {
-    private final Cells cells;
+    private Cells cells;
 
     public CellGame(int x, int y, String input) {
         this.cells = new Cells(input, x, y);
@@ -12,6 +12,7 @@ public class CellGame {
     }
 
     public void nextFrame() {
+        this.cells = cells.nextFrame();
     }
 
     public String show() {

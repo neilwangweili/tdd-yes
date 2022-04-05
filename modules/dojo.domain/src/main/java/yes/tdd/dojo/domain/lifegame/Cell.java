@@ -1,7 +1,7 @@
 package yes.tdd.dojo.domain.lifegame;
 
 public final class Cell {
-    private boolean state;
+    private final boolean state;
 
     private Cell(char state) {
         this.state = '*' == state;
@@ -13,5 +13,9 @@ public final class Cell {
 
     public String state() {
         return state ? "*" : ".";
+    }
+
+    public Integer count() {
+        return state ? 1 : 0;
     }
 }
