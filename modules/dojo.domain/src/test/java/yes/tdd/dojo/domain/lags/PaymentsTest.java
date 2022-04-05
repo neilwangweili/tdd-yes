@@ -8,6 +8,7 @@ public class PaymentsTest {
     @Nested
     class IntegrationTest {
         @Test
+        @Disabled
         void should_be_able_to_calculate_the_best_advice_giving_by_orders() {
             Payments payments = Payments.create(
                 Order.of("AF514", 0, 5, 10),
@@ -25,5 +26,10 @@ public class PaymentsTest {
         void should_be_able_to_tell_us_if_giving_empty_orders() {
             assertEquals(Payments.create().findBest(), "No order.");
         }
+    }
+
+    @Test
+    void should_be_able_to_calculate_the_best_advice_giving_by_one_order() {
+        assertEquals(Payments.create(Order.of("AF514", 0, 5, 5)).findBest(), "The best choices is: AF514. The gain is 5.");
     }
 }

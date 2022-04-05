@@ -16,7 +16,13 @@ public final class Payments extends DomainField<List<Order>> {
 
     public String findBest() {
         if (empty()) return "No order.";
-        return "The best choices is: AF514 BA01. The gain is 18.";
+        return report(orders());
+    }
+
+    private String report(List<Order> orders) {
+        String names = orders.stream().map(Order::plane).collect(Collectors.joining(" "));
+        int sum = orders.stream().mapToInt(Order::pay).sum();
+        return "The best choices is: " + names + ". The gain is " + sum + ".";
     }
 
     private boolean empty() {
