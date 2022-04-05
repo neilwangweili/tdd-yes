@@ -19,6 +19,7 @@ public class Dictionary {
     }
 
     public String convert(String target) {
-        return "";
+        if (target.isEmpty()) return target;
+        return dictionary.get(target.replaceAll("\\$", ""));
     }
 }
