@@ -14,9 +14,9 @@ public class FooBarQix {
         this.line = stringBuilder.toString().isBlank() ? giving.toString() : stringBuilder.toString();
     }
 
-    private void build(StringBuilder stringBuilder, Integer giving, Integer intTag, String append) {
-        if (canDivide(giving, intTag)) stringBuilder.append(append);
-        if (contains(giving, intTag.toString())) stringBuilder.append(append);
+    private void build(StringBuilder stringBuilder, Integer giving, Integer tag, String append) {
+        if (canDivide(giving, tag)) stringBuilder.append(append);
+        if (contains(giving, tag.toString())) stringBuilder.append(append);
     }
 
     private boolean contains(Integer giving, String strFooTag) {
