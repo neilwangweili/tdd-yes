@@ -1,17 +1,14 @@
 package yes.tdd.dojo.domain.lifegame;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class Cells {
     private final List<CellX> cells;
 
     public Cells(String input, int x, int y) {
         String[] strings = input.split("\n");
-        List<CellX> cells = new ArrayList<>();
-        for (int i = 0; i < y; i++) {
-            cells.add(new CellX(x, strings[i]));
-        }
-        this.cells = cells;
+        this.cells = IntStream.range(0, y).mapToObj(i -> new CellX(x, strings[i])).collect(Collectors.toList());
     }
 
     public Cells(List<CellX> cells) {
@@ -19,23 +16,19 @@ public class Cells {
     }
 
     public String show() {
-        StringBuilder builder = new StringBuilder();
-        for (CellX cellX : cells) {
-            cellX.show(builder);
-            if (cells.indexOf(cellX) != cells.size() - 1) builder.append("\n");
-        }
-        return builder.toString();
+        return cells.stream().map(CellX::show).collect(Collectors.joining("\n"));
     }
 
     public Cells nextFrame() {
-        List<CellX> newCells = new ArrayList<>();
-        for (CellX cellX : cells) {
-            if (cells.indexOf(cellX) == 0 || cells.indexOf(cellX) == cells.size() - 1) {
-                newCells.add(cellX);
-                continue;
-            }
-            newCells.add(cellX.nextFrame(cells));
-        }
-        return new Cells(newCells);
+        return new Cells(this.cells.stream().map(this::nextFrame).collect(Collectors.toList()));
+    }
+
+    private CellX nextFrame(CellX cellX) {
+        if (isAtSide(cellX)) return cellX;
+        return cellX.nextFrame(cells);
+    }
+
+    private boolean isAtSide(CellX cellX) {
+        return cells.indexOf(cellX) == 0 || cells.indexOf(cellX) == cells.size() - 1;
     }
 }

@@ -1,6 +1,7 @@
 package yes.tdd.dojo.domain.lifegame;
 
-import java.util.*;
+import java.util.List;
+import java.util.stream.*;
 
 public class CellX {
     private static final int TWO = 2;
@@ -8,33 +9,28 @@ public class CellX {
     private final List<Cell> cells;
 
     public CellX(int x, String strings) {
-        List<Cell> cellsX = new ArrayList<>();
-        for (int j = 0; j < x; j++) {
-            cellsX.add(Cell.of(strings.charAt(j)));
-        }
-        this.cells = cellsX;
+        this.cells = IntStream.range(0, x).mapToObj(i -> Cell.of(strings.charAt(i))).collect(Collectors.toList());
     }
 
     public CellX(List<Cell> newCells) {
         this.cells = newCells;
     }
 
-    public void show(StringBuilder builder) {
-        for (Cell cell : cells) {
-            builder.append(cell.state());
-        }
+    public String show() {
+        return cells.stream().map(Cell::state).collect(Collectors.joining());
     }
 
     public CellX nextFrame(List<CellX> cells) {
-        List<Cell> newCells = new ArrayList<>();
-        for (int i = 0; i < this.cells.size(); i++) {
-            if (i == 0 || i == this.cells.size() - 1) {
-                newCells.add(this.cells.get(i));
-                continue;
-            }
-            newCells.add(Cell.of(newState(calculateLivingCellsCount(cells, i), i)));
-        }
-        return new CellX(newCells);
+        return new CellX(IntStream.range(0, this.cells.size()).mapToObj(i -> addCells(cells, i)).collect(Collectors.toList()));
+    }
+
+    private Cell addCells(List<CellX> cells, int i) {
+        if (isAtSide(i)) return this.cells.get(i);
+        return Cell.of(newState(calculateLivingCellsCount(cells, i), i));
+    }
+
+    private boolean isAtSide(int i) {
+        return i == 0 || i == this.cells.size() - 1;
     }
 
     private char newState(int count, int i) {
