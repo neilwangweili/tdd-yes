@@ -30,4 +30,11 @@ public class DictionaryTest {
             .isInstanceOf(InsufficientInputStringException.class)
             .hasMessage("Dollar chars is not pairs!");
     }
+
+    @Test
+    void should_throw_exception_when_giving_no_such_key_string() {
+        assertThat(catchThrowable(() -> dictionary.convert("$123$")))
+            .isInstanceOf(InsufficientInputStringException.class)
+            .hasMessage("No such key in dictionary!");
+    }
 }

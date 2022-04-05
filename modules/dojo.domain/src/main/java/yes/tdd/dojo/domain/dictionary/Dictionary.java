@@ -33,7 +33,12 @@ public class Dictionary {
 
     private String replacement(String target, int firstIndex) {
         if (!target.contains(TARGET_MARKER)) throw new InsufficientInputStringException("Dollar chars is not pairs!");
-        return dictionary.get(target.substring(firstIndex, target.indexOf(TARGET_MARKER)));
+        if (!dictionary.containsKey(replacementString(target, firstIndex))) throw new InsufficientInputStringException("No such key in dictionary!");
+        return dictionary.get(replacementString(target, firstIndex));
+    }
+
+    private String replacementString(String target, int firstIndex) {
+        return target.substring(firstIndex, target.indexOf(TARGET_MARKER));
     }
 
     private String rightPart(String target) {
