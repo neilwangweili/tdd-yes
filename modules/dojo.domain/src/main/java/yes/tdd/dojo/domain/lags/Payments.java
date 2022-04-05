@@ -30,18 +30,18 @@ public final class Payments extends DomainField<List<Order>> {
 
     private List<Order> findBestOrders(List<Order> orders) {
         if (orders.isEmpty()) return new ArrayList<>();
-        return findBestOrders(ordersWithCurrentOrder(orders), ordersWithoutCurrentOrder(orders)).stream().sorted().collect(Collectors.toList());
+        return findBestOrders(findBestOrdersWithCurrentOrder(orders), findBestOrdersBeforeCurrentOrder(orders)).stream().sorted().collect(Collectors.toList());
     }
 
-    private List<Order> findBestOrders(List<Order> ordersWithCurrentOrder, List<Order> ordersWithoutCurrentOrder) {
-        return sum(ordersWithCurrentOrder) > sum(ordersWithoutCurrentOrder) ? ordersWithCurrentOrder : ordersWithoutCurrentOrder;
+    private List<Order> findBestOrders(List<Order> o1, List<Order> o2) {
+        return sum(o1) > sum(o2) ? o1 : o2;
     }
 
-    private List<Order> ordersWithoutCurrentOrder(List<Order> orders) {
+    private List<Order> findBestOrdersBeforeCurrentOrder(List<Order> orders) {
         return findBestOrders(buildOrdersWithoutCurrentOrder(orders));
     }
 
-    private List<Order> ordersWithCurrentOrder(List<Order> orders) {
+    private List<Order> findBestOrdersWithCurrentOrder(List<Order> orders) {
         Order currentOrder = orders.get(0);
         List<Order> result = findBestOrders(buildOrdersRemainingByStart(currentOrder));
         result.add(currentOrder);
@@ -54,8 +54,8 @@ public final class Payments extends DomainField<List<Order>> {
         return ordersWithoutCurrentOrder;
     }
 
-    private List<Order> buildOrdersRemainingByStart(Order currentOrder) {
-        return orders().stream().filter(o -> o.startBefore(currentOrder)).collect(Collectors.toList());
+    private List<Order> buildOrdersRemainingByStart(Order order) {
+        return orders().stream().filter(o -> o.startBefore(order)).collect(Collectors.toList());
     }
 
     private String report(List<Order> orders) {
