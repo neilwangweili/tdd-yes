@@ -1,9 +1,11 @@
 package yes.tdd.dojo.domain.dictionary;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DictionaryTest {
@@ -20,5 +22,12 @@ public class DictionaryTest {
     })
     void should_be_able_to_convert_string_to_expect_string(String original, String expect) {
         assertEquals(dictionary.convert(original), expect);
+    }
+
+    @Test
+    void should_throw_exception_when_giving_single_dollar() {
+        assertThat(catchThrowable(() -> dictionary.convert("$")))
+            .isInstanceOf(InsufficientInputStringException.class)
+            .hasMessage("Dollar chars is not pairs!");
     }
 }
