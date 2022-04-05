@@ -11,6 +11,10 @@ public class StartTime extends DomainField<Integer> implements Comparable<StartT
         return super.get();
     }
 
+    public boolean startBefore(StartTime o) {
+        return startTime() > o.startTime();
+    }
+
     @Override
     public int compareTo(StartTime o) {
         return startTime() - o.startTime();

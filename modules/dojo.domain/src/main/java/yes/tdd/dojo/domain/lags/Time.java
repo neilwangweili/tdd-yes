@@ -9,12 +9,12 @@ public class Time implements Comparable<Time> {
         this.duration = new Duration(duration);
     }
 
-    private Integer endTime() {
-        return this.startTime.startTime() + this.duration.duration();
+    public boolean startBefore(Time o) {
+        return this.startTime.startBefore(o.endTime());
     }
 
-    public boolean startBefore(Time o) {
-        return this.startTime.startTime() > o.endTime();
+    private StartTime endTime() {
+        return new StartTime(this.startTime.startTime() + this.duration.duration());
     }
 
     @Override
