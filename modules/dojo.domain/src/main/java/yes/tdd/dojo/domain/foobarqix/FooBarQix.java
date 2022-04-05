@@ -12,14 +12,17 @@ public class FooBarQix {
         String givingString = giving.toString();
         StringBuilder result = new StringBuilder();
         while (StringUtils.isNotEmpty(givingString)) {
-            result.append(build(Integer.valueOf(givingString)));
+            StringBuilder builder = build(Integer.valueOf(givingString));
+            if (builder.toString().isEmpty() && !givingString.contains("0")) builder = new StringBuilder(givingString);
+            if (builder.toString().isEmpty()) builder = new StringBuilder(givingString.substring(0, givingString.indexOf("0")));
+            result.append(builder);
             if (!givingString.contains("0")) givingString = "";
             else {
                 givingString = givingString.substring(givingString.indexOf("0") + 1);
                 result.append("*");
             }
         }
-        this.line = result.toString().isEmpty() ? giving.toString() : result.toString();
+        this.line = result.toString();
     }
 
     private StringBuilder build(Integer giving) {
