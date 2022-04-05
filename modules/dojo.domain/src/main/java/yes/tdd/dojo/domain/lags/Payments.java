@@ -21,11 +21,7 @@ public final class Payments extends DomainField<List<Order>> {
 
     public String findBest() {
         if (orders().isEmpty()) return "No order.";
-        return report(findBestOrders());
-    }
-
-    private List<Order> findBestOrders() {
-        return findBestOrders(orders());
+        return report(findBestOrders(orders()));
     }
 
     private List<Order> findBestOrders(List<Order> orders) {
