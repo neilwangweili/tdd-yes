@@ -8,7 +8,6 @@ public class PaymentsTest {
     @Nested
     class IntegrationTest {
         @Test
-        @Disabled
         void should_be_able_to_calculate_the_best_advice_giving_by_orders() {
             Payments payments = Payments.create(
                 Order.of("AF514", 0, 5, 10),

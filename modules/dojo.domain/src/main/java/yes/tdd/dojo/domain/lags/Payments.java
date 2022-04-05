@@ -11,7 +11,11 @@ public final class Payments extends DomainField<List<Order>> {
     }
 
     private Payments(Order[] orders) {
-        super(Arrays.stream(orders).collect(Collectors.toList()), "The payments are too large!");
+        super(
+            Arrays.stream(orders)
+                .collect(Collectors.toList()),
+            "The payments are too large!"
+        );
     }
 
     public String findBest() {
@@ -20,9 +24,15 @@ public final class Payments extends DomainField<List<Order>> {
     }
 
     private String report(List<Order> orders) {
-        String names = orders.stream().map(Order::plane).collect(Collectors.joining(" "));
-        int sum = orders.stream().mapToInt(Order::pay).sum();
-        return "The best choices is: " + names + ". The gain is " + sum + ".";
+        return "The best choices is: " + names(orders) + ". The gain is " + sum(orders) + ".";
+    }
+
+    private int sum(List<Order> orders) {
+        return orders.stream().mapToInt(Order::pay).sum();
+    }
+
+    private String names(List<Order> orders) {
+        return orders.stream().map(Order::plane).collect(Collectors.joining(" "));
     }
 
     private boolean empty() {
