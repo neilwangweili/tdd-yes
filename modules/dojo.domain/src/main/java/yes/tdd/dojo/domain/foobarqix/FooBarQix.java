@@ -1,5 +1,7 @@
 package yes.tdd.dojo.domain.foobarqix;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class FooBarQix {
     private static final int INT_FOO_TAG = 3;
     private static final int INT_BAR_TAG = 5;
@@ -7,17 +9,17 @@ public class FooBarQix {
     private final String line;
 
     public FooBarQix(Integer giving) {
-        if (!giving.toString().contains("0")) {
-            StringBuilder stringBuilder = build(giving);
-            this.line = stringBuilder.toString().isBlank() ? giving.toString() : stringBuilder.toString();
-        } else {
-            String result = giving.toString();
-            while (result.contains("0")) {
-                StringBuilder stringBuilder = build(giving).append("*");
-                result = stringBuilder + result.substring(0, result.indexOf("0") + 1);
+        String givingString = giving.toString();
+        StringBuilder result = new StringBuilder();
+        while (StringUtils.isNotEmpty(givingString)) {
+            result.append(build(Integer.valueOf(givingString)));
+            if (!givingString.contains("0")) givingString = "";
+            else {
+                givingString = givingString.substring(givingString.indexOf("0") + 1);
+                result.append("*");
             }
-            this.line = result;
         }
+        this.line = result.toString().isEmpty() ? giving.toString() : result.toString();
     }
 
     private StringBuilder build(Integer giving) {
