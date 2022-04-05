@@ -12,27 +12,37 @@ public class FooBarQix {
     public FooBarQix(Integer giving) {
         String givingString = giving.toString();
         StringBuilder result = new StringBuilder();
-        while (StringUtils.isNotEmpty(givingString)) {
-            appendNums(givingString, result);
-            givingString = produceGivingString(givingString, result);
-        }
+        while (StringUtils.isNotEmpty(givingString)) givingString = producingLine(givingString, result);
         this.line = result.toString();
+    }
+
+    private String producingLine(String givingString, StringBuilder result) {
+        appendNums(givingString, result);
+        givingString = produceGivingString(givingString, result);
+        return givingString;
     }
 
     private void appendNums(String givingString, StringBuilder result) {
         StringBuilder builder = build(Integer.valueOf(givingString));
         if (isEmpty(builder) && !givingString.contains(STAR)) builder = new StringBuilder(givingString);
-        if (isEmpty(builder)) builder = new StringBuilder(givingString.substring(0, givingString.indexOf(STAR)));
+        if (isEmpty(builder)) builder = new StringBuilder(givingString.substring(0, index(givingString)));
         result.append(builder);
     }
 
     private String produceGivingString(String givingString, StringBuilder result) {
         if (!givingString.contains(STAR)) givingString = "";
-        else {
-            givingString = givingString.substring(givingString.indexOf(STAR) + 1);
-            result.append("*");
-        }
+        else givingString = produceGivingStringWhenNasStar(givingString, result);
         return givingString;
+    }
+
+    private String produceGivingStringWhenNasStar(String givingString, StringBuilder result) {
+        givingString = givingString.substring(index(givingString) + 1);
+        result.append("*");
+        return givingString;
+    }
+
+    private int index(String givingString) {
+        return givingString.indexOf(STAR);
     }
 
     private boolean isEmpty(StringBuilder builder) {
