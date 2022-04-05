@@ -1,13 +1,9 @@
 package yes.tdd.dojo.domain.lifegame;
 
 public class CellGame {
-    private final int x;
-    private final int y;
     private final Cells cells;
 
     public CellGame(int x, int y, String input) {
-        this.x = x;
-        this.y = y;
         this.cells = new Cells(input, x, y);
     }
 
@@ -16,7 +12,6 @@ public class CellGame {
     }
 
     public void nextFrame() {
-
     }
 
     public String show() {
