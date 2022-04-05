@@ -1,17 +1,17 @@
 package yes.tdd.dojo.domain.lags;
 
+import yes.tdd.frameworks.domain.core.DomainField;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-public final class Payments {
-    private final List<Order> orders;
-
+public final class Payments extends DomainField<List<Order>> {
     public static Payments create(Order... orders) {
         return new Payments(orders);
     }
 
     private Payments(Order[] orders) {
-        this.orders = Arrays.stream(orders).collect(Collectors.toList());
+        super(Arrays.stream(orders).collect(Collectors.toList()), "The payments are too large!");
     }
 
     public String findBest() {
