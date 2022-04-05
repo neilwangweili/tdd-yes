@@ -2,15 +2,15 @@ package yes.tdd.dojo.domain.lags;
 
 public class Time implements Comparable<Time> {
     private final StartTime startTime;
-    private final Integer duration;
+    private final Duration duration;
 
     public Time(Integer startTime, Integer duration) {
         this.startTime = new StartTime(startTime);
-        this.duration = duration;
+        this.duration = new Duration(duration);
     }
 
     private Integer endTime() {
-        return this.startTime.startTime() + this.duration;
+        return this.startTime.startTime() + this.duration.duration();
     }
 
     public boolean startBefore(Time o) {
