@@ -36,13 +36,13 @@ class DomainFieldTest {
 
     @Test
     void should_throw_exception_when_integer_too_large() {
-        Throwable throwable = catchThrowable(() -> new DomainField<>(12, 10, "123"));
+        Throwable throwable = catchThrowable(() -> new DomainField<>(12, 20, "123"));
         assertThat(throwable).isInstanceOf(IllegalArgumentException.class).hasMessage("123");
     }
 
     @Test
     void should_be_able_to_build_a_integer_field() {
-        Throwable throwable = catchThrowable(() -> new DomainField<>(1, 10, "123"));
+        Throwable throwable = catchThrowable(() -> new DomainField<>(1, 0, "123"));
         assertThat(throwable).isNull();
     }
 

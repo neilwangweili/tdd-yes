@@ -26,10 +26,6 @@ public class DomainField<T> {
         return field;
     }
 
-    public int maxSize() {
-        return maxSize;
-    }
-
     protected void set(T field) {
         this.field = field;
         verify();
@@ -55,7 +51,7 @@ public class DomainField<T> {
     );
 
     protected Predicate<DomainField<?>> integer() {
-        return o -> (Integer) o.get() <= maxSize;
+        return o -> (Integer) o.get() > maxSize;
     }
 
     protected Predicate<DomainField<?>> collection() {
