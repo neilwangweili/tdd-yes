@@ -15,15 +15,15 @@ jib {
     from {
         image = 'registry.cn-zhangjiakou.aliyuncs.com/neilwang.wiki/openjdk:11'
         auth {
-            username = '{docker-registry-user-name}' // TODO: Use actual docker registry username instead.
-            password = '{docker-registry-password}' // TODO: Use actual docker registry password instead.
+            username = '{docker-registry-user-name}'
+            password = '{docker-registry-password}'
         }
     }
     to {
         image = "registry.cn-zhangjiakou.aliyuncs.com/neilwang.wiki/$project.name:latest"
         auth {
-            username = '{docker-registry-user-name}' // TODO: Use actual docker registry username instead.
-            password = '{docker-registry-password}' // TODO: Use actual docker registry password instead.
+            username = '{docker-registry-user-name}'
+            password = '{docker-registry-password}'
         }
     }
     allowInsecureRegistries = true
