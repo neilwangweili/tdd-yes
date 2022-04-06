@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/setup-java@v2
       - name: check
-      - with:
+        with:
           java-version: 17
         run: sh ./scripts/check-all
