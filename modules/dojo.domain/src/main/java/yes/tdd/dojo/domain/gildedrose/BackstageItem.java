@@ -1,6 +1,6 @@
 package yes.tdd.dojo.domain.gildedrose;
 
-public class BackstageItem extends Item {
+public final class BackstageItem extends Item {
     private static final Integer TEN_DAYS = 10;
     private static final Integer FIVE_DAYS = 5;
 

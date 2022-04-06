@@ -1,6 +1,6 @@
 package yes.tdd.dojo.domain.gildedrose;
 
-public class Item {
+public sealed class Item permits AgedBrieItem, BackstageItem, SulfurasItem {
     private final String name;
     private int sellIn;
     private int quality;

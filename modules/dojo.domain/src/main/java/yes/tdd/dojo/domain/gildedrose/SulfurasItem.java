@@ -1,6 +1,6 @@
 package yes.tdd.dojo.domain.gildedrose;
 
-public class SulfurasItem extends Item {
+public final class SulfurasItem extends Item {
     private static final Integer SULFURAS_QUALITY = 80;
 
     public SulfurasItem(Item item) {
