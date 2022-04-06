@@ -13,4 +13,5 @@ jobs:
       - name: check
         with:
           java-version: 17
+          distribution: zulu
         run: sh ./scripts/check-all
