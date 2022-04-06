@@ -12,7 +12,7 @@ public class RegisterUserUseCase {
     }
 
     public String execute(UserInput userInput) {
-        User user = userInput.asDomain();
+        User user = User.newInstance(userInput.name(), userInput.email());
         user.save(userRepository);
         return user.id();
     }
