@@ -2,6 +2,8 @@ package yes.tdd.users.domain;
 
 import yes.tdd.frameworks.domain.core.GlobalIdentityService;
 
+import java.util.List;
+
 public final class User {
     private final UserId id;
     private final UserInfo userInfo;
@@ -20,6 +22,10 @@ public final class User {
 
     public static User findByEmail(String email, UserRepository userRepository) {
         return userRepository.findUserByEmail(email);
+    }
+
+    public static List<User> findAll(UserRepository userRepository) {
+        return userRepository.findAllUsers();
     }
 
     private User(String id, String name, String email) {

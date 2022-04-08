@@ -6,7 +6,7 @@ public final class Users {
     private final List<User> users;
 
     public static Users fetchAll(UserRepository userRepository) {
-        return new Users(userRepository.findAllUsers());
+        return new Users(User.findAll(userRepository));
     }
 
     public List<User> users() {
