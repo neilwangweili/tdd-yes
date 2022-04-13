@@ -33,3 +33,15 @@
 9. Life game
     - [Test](./modules/dojo.domain/src/test/java/yes/tdd/dojo/domain/lifegame)
     - [Codes](./modules/dojo.domain/src/main/java/yes/tdd/dojo/domain/lifegame)
+10. Mars rover
+    - [Test](./modules/dojo.domain/src/test/java/yes/tdd/dojo/domain/marsrover)
+    - [Codes](./modules/dojo.domain/src/main/java/yes/tdd/dojo/domain/marsrover)
+11. Roman calculator
+    - [Test](./modules/dojo.domain/src/test/java/yes/tdd/dojo/domain/romancalculator)
+    - [Codes](./modules/dojo.domain/src/main/java/yes/tdd/dojo/domain/romancalculator)
+12. Unit
+    - [Test](./modules/dojo.domain/src/test/java/yes/tdd/dojo/domain/unit)
+    - [Codes](./modules/dojo.domain/src/main/java/yes/tdd/dojo/domain/unit)
+13. Year
+    - [Test](./modules/dojo.domain/src/test/java/yes/tdd/dojo/domain/year)
+    - [Codes](./modules/dojo.domain/src/main/java/yes/tdd/dojo/domain/year)
