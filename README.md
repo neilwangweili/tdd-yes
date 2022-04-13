@@ -2,8 +2,9 @@
 [![CI](https://github.com/VWWL/tdd-yes/actions/workflows/main.yml/badge.svg)](https://github.com/VWWL/tdd-yes/actions/workflows/main.yml)
 
 ### Restful Demo:
-- [Test](./src/test/java/yes/tdd/usecases)
-- [Codes](./modules/users.gateways/src/main/java/yes/tdd/users/gateways/ohs)
+1. User
+   - [Test](./src/test/java/yes/tdd/usecases)
+   - [Codes](./modules/users.gateways/src/main/java/yes/tdd/users/gateways/ohs)
 
 ### Dojos
 1. Args
