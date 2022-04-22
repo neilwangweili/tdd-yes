@@ -5,15 +5,15 @@ import yes.tdd.users.domain.*;
 
 @UseCase
 public class RegisterUserUseCase {
-    private final UserRepository userRepository;
+    private final Users users;
 
-    public RegisterUserUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public RegisterUserUseCase(Users users) {
+        this.users = users;
     }
 
     public String execute(UserInput userInput) {
         User user = User.newInstance(userInput.name(), userInput.email());
-        user.save(userRepository);
+        users.add(user);
         return user.id();
     }
 }

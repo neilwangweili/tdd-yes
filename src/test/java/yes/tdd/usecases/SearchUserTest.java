@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.OK;
 
 public class SearchUserTest extends IntegrationTest {
-    private @Resource UserRepository userRepository;
+    private @Resource Users users;
     private User john;
 
     @BeforeEach
     void setUp() {
         john = User.newInstance("John", "john.smith@email.com");
-        john.save(userRepository);
+        users.add(john);
     }
 
     @Test
@@ -30,6 +30,6 @@ public class SearchUserTest extends IntegrationTest {
 
     @AfterEach
     void tearDown() {
-        userRepository.removeAll();
+        users.removeAll();
     }
 }

@@ -9,18 +9,18 @@ import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SaveUserTest extends IntegrationTest {
-    private @Resource UserRepository userRepository;
+    private @Resource Users users;
     private User john;
 
     @BeforeEach
     void setUp() {
         john = User.newInstance("John", "john.smith@email.com");
-        john.save(userRepository);
+        users.add(john);
     }
 
     @Test
     void should_be_able_to_save_one_user_and_loaded_saved_user() {
-        User fount = User.fetchById(john.id(), userRepository);
+        User fount = users.fetchById(john.id());
         assertEquals(fount.id(), john.id());
         assertEquals(fount.name(), john.name());
         assertEquals(fount.email(), john.email());
@@ -28,7 +28,7 @@ public class SaveUserTest extends IntegrationTest {
 
     @Test
     void should_be_able_to_load_saved_user_by_email() {
-        User fount = User.findByEmail("john.smith@email.com", userRepository);
+        User fount = users.fetchByEmail("john.smith@email.com");
         assertEquals(fount.id(), john.id());
         assertEquals(fount.name(), john.name());
         assertEquals(fount.email(), john.email());
@@ -36,6 +36,6 @@ public class SaveUserTest extends IntegrationTest {
 
     @AfterEach
     void tearDown() {
-        userRepository.removeAll();
+        users.removeAll();
     }
 }

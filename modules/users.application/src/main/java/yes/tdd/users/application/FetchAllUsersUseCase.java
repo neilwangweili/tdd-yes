@@ -2,17 +2,17 @@ package yes.tdd.users.application;
 
 import yes.tdd.frameworks.application.core.UseCase;
 import yes.tdd.users.application.vo.UserOutputs;
-import yes.tdd.users.domain.*;
+import yes.tdd.users.domain.Users;
 
 @UseCase
 public class FetchAllUsersUseCase {
-    private final UserRepository userRepository;
+    private final Users users;
 
-    public FetchAllUsersUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public FetchAllUsersUseCase(Users users) {
+        this.users = users;
     }
 
     public UserOutputs execute() {
-        return UserOutputs.from(Users.fetchAll(userRepository));
+        return UserOutputs.from(users.fetchAll());
     }
 }

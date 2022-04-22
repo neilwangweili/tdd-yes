@@ -6,13 +6,14 @@ import yes.tdd.users.domain.*;
 
 @UseCase
 public class FetchUserUseCase {
-    private final UserRepository userRepository;
+    private final Users users;
 
-    public FetchUserUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public FetchUserUseCase(Users users) {
+        this.users = users;
     }
 
+
     public UserOutput execute(String id) {
-        return UserOutput.from(User.fetchById(id, userRepository));
+        return UserOutput.from(users.fetchById(id));
     }
 }

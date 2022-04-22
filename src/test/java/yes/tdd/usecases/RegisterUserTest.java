@@ -13,20 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.OK;
 
 public class RegisterUserTest extends IntegrationTest {
-    private @Resource UserRepository userRepository;
+    private @Resource Users users;
 
     @ParameterizedTest
     @CsvSource({"John,john.smith@email.com"})
     void should_be_able_to_register_a_user_via_api(String name, String email) {
         TestResponse response = post("/users", Map.of("name", name, "email", email));
         assertEquals(response.statusCode(), OK);
-        User fount = User.fetchById(response.value("$"), userRepository);
+        User fount = users.fetchById(response.value("$"));
         assertEquals(fount.name(), name);
         assertEquals(fount.email(), email);
     }
 
     @AfterEach
     void tearDown() {
-        userRepository.removeAll();
+        users.removeAll();
     }
 }

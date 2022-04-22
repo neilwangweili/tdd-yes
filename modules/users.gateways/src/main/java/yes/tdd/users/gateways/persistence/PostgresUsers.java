@@ -1,36 +1,35 @@
 package yes.tdd.users.gateways.persistence;
 
 import org.springframework.data.repository.Repository;
-import yes.tdd.users.domain.User;
-import yes.tdd.users.domain.UserRepository;
+import yes.tdd.users.domain.*;
 
 import java.util.List;
 import java.util.stream.*;
 
-public interface PostgresUserRepository extends Repository<PostgresUser, String>, UserRepository {
+public interface PostgresUsers extends Repository<PostgresUser, String>, Users {
     @Override
-    default User save(User user) {
+    default User add(User user) {
         return this.save(new PostgresUser(user)).asDomain();
     }
 
     PostgresUser save(PostgresUser user);
 
     @Override
-    default User findUserById(String id) {
+    default User fetchById(String id) {
         return this.findById(id).asDomain();
     }
 
     PostgresUser findById(String id);
 
     @Override
-    default User findUserByEmail(String email) {
+    default User fetchByEmail(String email) {
         return this.findByEmail(email).asDomain();
     }
 
     PostgresUser findByEmail(String email);
 
     @Override
-    default List<User> findAllUsers() {
+    default List<User> fetchAll() {
         return this.findAll().map(PostgresUser::asDomain).collect(Collectors.toList());
     }
 

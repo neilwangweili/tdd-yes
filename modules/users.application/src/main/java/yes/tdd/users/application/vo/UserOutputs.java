@@ -1,7 +1,7 @@
 package yes.tdd.users.application.vo;
 
 import lombok.Getter;
-import yes.tdd.users.domain.Users;
+import yes.tdd.users.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public final class UserOutputs {
     private final List<UserOutput> users;
 
-    public UserOutputs(Users users) {
-        this.users = users.users().stream().map(UserOutput::from).collect(Collectors.toList());
+    public UserOutputs(List<User> users) {
+        this.users = users.stream().map(UserOutput::from).collect(Collectors.toList());
     }
 
-    public static UserOutputs from(Users users) {
+    public static UserOutputs from(List<User> users) {
         return new UserOutputs(users);
     }
 }
