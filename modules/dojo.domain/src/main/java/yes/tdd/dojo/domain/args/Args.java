@@ -12,8 +12,8 @@ public final class Args<T> {
         boolean.class, bool(),
         int.class, unary(0, Integer::parseInt),
         String.class, unary("", String::valueOf),
-        String[].class, list(String[]::new, String::valueOf),
-        Integer[].class, list(Integer[]::new, Integer::parseInt));
+        String[].class, list(String::valueOf, String[]::new),
+        Integer[].class, list(Integer::parseInt, Integer[]::new));
 
     private final Class<T> optionClass;
     private final Map<Class<?>, OptionParser<?>> parsers;

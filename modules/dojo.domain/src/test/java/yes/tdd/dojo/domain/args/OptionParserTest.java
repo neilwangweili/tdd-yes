@@ -7,7 +7,7 @@ import org.mockito.InOrder;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.*;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -102,13 +102,13 @@ public class OptionParserTest {
 
         @Test
         void should_not_treat_negative_int_with_flag() {
-            assertArrayEquals(new Integer[]{1, 2, -3, 5}, OptionParsers.list(Integer[]::new, Integer::parseInt).parse(asList("-", "-d", "1", "2", "-3", "5"), option("-d")));
+            assertArrayEquals(new Integer[]{1, 2, -3, 5}, list(Integer::parseInt, Integer[]::new).parse(asList("-", "-d", "1", "2", "-3", "5"), option("-d")));
         }
 
         @Test
         void should_parse_list_value() {
             Function<String, Object> parser = mock(Function.class);
-            OptionParsers.list(Object[]::new, parser).parse(asList("-g", "this", "is", "a", "list"), option("-g"));
+            list(parser, Object[]::new).parse(asList("-g", "this", "is", "a", "list"), option("-g"));
             InOrder order = inOrder(parser);
             order.verify(parser).apply("this");
             order.verify(parser).apply("is");
@@ -118,7 +118,7 @@ public class OptionParserTest {
 
         @Test
         void should_use_empty_array_as_default_value() {
-            assertEquals(0, OptionParsers.list(String[]::new, String::valueOf).parse(List.of(), option("-g")).length);
+            assertEquals(0, list(String::valueOf, String[]::new).parse(List.of(), option("-g")).length);
         }
     }
 

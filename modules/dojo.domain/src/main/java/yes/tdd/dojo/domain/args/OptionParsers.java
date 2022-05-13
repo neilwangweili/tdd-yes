@@ -17,7 +17,7 @@ public final class OptionParsers {
         return (arguments, option) -> values(arguments, option, expectedSize).map(o -> parseValue(o.get(0), valueParser)).orElse(defaultValue);
     }
 
-    public static <T> OptionParser<T[]> list(IntFunction<T[]> generator, Function<String, T> valueParser) {
+    public static <T> OptionParser<T[]> list(Function<String, T> valueParser, IntFunction<T[]> generator) {
         return (arguments, option) -> values(arguments, option).map(o -> o.stream().map(value -> parseValue(value, valueParser)).toArray(generator))
             .orElse(generator.apply(0));
     }
