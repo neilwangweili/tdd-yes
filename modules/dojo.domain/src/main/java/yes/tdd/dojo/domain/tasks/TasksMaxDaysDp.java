@@ -1,7 +1,5 @@
 package yes.tdd.dojo.domain.tasks;
 
-import com.google.common.collect.Lists;
-
 import java.util.*;
 
 public class TasksMaxDaysDp {
@@ -13,7 +11,7 @@ public class TasksMaxDaysDp {
 
     public void record(Integer number, Integer index) {
         if (!dp.containsKey(number)) {
-            dp.put(number, new TasksDaysDp(Lists.newArrayList(index)));
+            dp.put(number, new TasksDaysDp(index));
             return;
         }
         dp.get(number).add(index);

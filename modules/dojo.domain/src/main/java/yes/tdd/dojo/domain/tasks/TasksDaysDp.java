@@ -1,12 +1,14 @@
 package yes.tdd.dojo.domain.tasks;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class TasksDaysDp {
     private final List<Integer> days;
 
-    public TasksDaysDp(List<Integer> days) {
-        this.days = days;
+    public TasksDaysDp(Integer day) {
+        this.days = Lists.newArrayList(day);
     }
 
     public void add(Integer index) {
